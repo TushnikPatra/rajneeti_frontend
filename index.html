@@ -201,6 +201,8 @@ body::after {
 .catbar {
   background:var(--bg3); border-bottom:1px solid var(--line2);
   padding:0 36px; display:flex; gap:0; overflow-x:auto; scrollbar-width:none;
+  position:sticky; top:var(--catbar-top,89px); z-index:200;
+  box-shadow:0 2px 6px rgba(30,20,10,0.06);
 }
 .catbar::-webkit-scrollbar { display:none; }
 .cbtn {
@@ -485,6 +487,68 @@ select option { background:var(--white); color:var(--text); }
 .fb-text { font-family:'IBM Plex Mono',monospace; font-size:9px; letter-spacing:1px; color:var(--text-mid); }
 .fb-flag { font-size:18px; }
 
+/* ═══ HAMBURGER MENU ═══ */
+.hamburger {
+  display:none; flex-direction:column; gap:5px;
+  background:none; border:none; cursor:pointer; padding:6px;
+  flex-shrink:0;
+}
+.hamburger span {
+  display:block; width:22px; height:2px;
+  background:var(--header-mid); border-radius:2px;
+  transition:all .25s ease;
+}
+.hamburger.open span:nth-child(1) { transform:translateY(7px) rotate(45deg); background:var(--tc-saffron); }
+.hamburger.open span:nth-child(2) { opacity:0; transform:scaleX(0); }
+.hamburger.open span:nth-child(3) { transform:translateY(-7px) rotate(-45deg); background:var(--tc-saffron); }
+
+.mobile-menu {
+  display:none; position:fixed; top:0; left:0; right:0; bottom:0;
+  background:var(--header-bg); z-index:500; flex-direction:column;
+  padding:80px 28px 40px; gap:4px; overflow-y:auto;
+}
+.mobile-menu.open { display:flex; animation:fadeUp .2s ease; }
+.mobile-menu-close {
+  position:absolute; top:20px; right:20px;
+  background:none; border:none; color:var(--header-mid);
+  font-size:22px; cursor:pointer; padding:4px 8px;
+}
+.mm-item {
+  background:none; border:none; text-align:left;
+  font-family:'IBM Plex Mono',monospace; font-size:13px;
+  letter-spacing:2px; text-transform:uppercase; cursor:pointer;
+  color:var(--header-mid); padding:16px 0;
+  border-bottom:1px solid rgba(255,255,255,0.06);
+  transition:color .2s; width:100%;
+}
+.mm-item:hover { color:var(--header-text); }
+.mm-item.write { color:var(--tc-saffron); }
+.mm-item.logout-item { color:#E05040; }
+.mm-user-info {
+  display:flex; align-items:center; gap:12px;
+  padding:0 0 20px; margin-bottom:8px;
+  border-bottom:1px solid rgba(255,107,0,0.2);
+}
+.mm-avatar {
+  width:40px; height:40px; border-radius:50%;
+  background:var(--tc-saffron);
+  display:flex; align-items:center; justify-content:center;
+  font-family:'IBM Plex Mono',monospace; font-size:16px;
+  font-weight:700; color:white;
+}
+.mm-username {
+  font-family:'IBM Plex Mono',monospace; font-size:13px;
+  letter-spacing:2px; text-transform:uppercase; color:var(--header-text);
+}
+.mm-email {
+  font-family:'IBM Plex Mono',monospace; font-size:10px;
+  color:var(--header-mid); margin-top:2px;
+}
+.mm-divider {
+  height:1px; background:rgba(255,255,255,0.06);
+  margin:8px 0;
+}
+
 /* ═══ RESPONSIVE ═══ */
 @media (max-width:960px) {
   .hero { grid-template-columns:1fr; padding:40px 24px; }
@@ -492,16 +556,64 @@ select option { background:var(--white); color:var(--text); }
   .feed-wrap { grid-template-columns:1fr; padding:32px 24px; }
   .sidebar { display:none; }
   .footer { grid-template-columns:1fr; gap:24px; }
+  /* catbar top set by JS */
 }
+
 @media (max-width:640px) {
-  .masthead { padding:16px 20px; grid-template-columns:1fr 1fr; }
+  /* Topbar: hide tagline on very small screens */
+  .topbar { padding:6px 16px; gap:8px; }
+  .topbar-hl { display:none; }
+  .topbar-langs { gap:4px; }
+
+  /* Masthead: logo + hamburger only */
+  .masthead {
+    padding:14px 16px;
+    grid-template-columns:1fr auto;
+    gap:0;
+    top:0;
+  }
   .masthead-center { display:none; }
-  .topbar { padding:6px 20px; }
-  .catbar { padding:0 16px; }
-  .write-wrap,.read-wrap,.about-wrap,.my-posts-wrap { padding:36px 20px; }
+  .masthead-nav { display:none; }   /* hidden — hamburger replaces it */
+  .hamburger { display:flex; }
+  .catbar { padding:0 12px; }
+
+  /* Hero mobile */
+  .hero { padding:32px 16px; }
+  .hero h1 { font-size:clamp(28px,7vw,42px); }
+  .hero-metrics { gap:20px; }
+  .metric-n { font-size:22px; }
+
+  /* Feed */
+  .feed-wrap { padding:20px 16px; gap:20px; }
+  .card-feature { padding:20px 16px; }
+  .card-title { font-size:18px; }
+  .card-meta { gap:6px; font-size:8px; }
+  .card-idx { display:none; }
+
+  /* Forms */
+  .write-wrap,.read-wrap,.about-wrap,.my-posts-wrap { padding:28px 16px; }
   .fgrid { grid-template-columns:1fr; }
+  .write-head h2 { font-size:28px; }
+  .read-title { font-size:clamp(22px,6vw,36px); }
+
+  /* About */
   .about-values { grid-template-columns:1fr; }
-  .footer,.footer-bottom { padding:28px 20px; }
+  .about-masthead-title { font-size:clamp(32px,8vw,52px); }
+
+  /* Footer */
+  .footer { padding:24px 16px; grid-template-columns:1fr; gap:20px; }
+  .footer-bottom { padding:12px 16px; flex-direction:column; gap:6px; text-align:center; }
+
+  /* My posts card */
+  .my-card { flex-direction:column; gap:12px; }
+  .my-card-actions { flex-direction:row; align-self:flex-start; }
+
+  /* Modal full-screen on mobile */
+  .modal { margin:0; border-radius:0; min-height:100vh; max-width:100%; border-top:none; }
+  .modal-overlay { align-items:flex-start; }
+  .modal-header { padding:24px 20px 0; }
+  .modal-body { padding:20px; }
+  .modal-footer { padding:0 20px 24px; }
 }
 </style>
 </head>
@@ -544,6 +656,20 @@ select option { background:var(--white); color:var(--text); }
   <div class="masthead-nav" id="masthead-nav">
     <!-- rendered by JS -->
   </div>
+  <!-- Hamburger (mobile only) -->
+  <button class="hamburger" id="hamburger-btn" onclick="toggleMobileMenu()" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</div>
+
+<!-- MOBILE MENU OVERLAY -->
+<div class="mobile-menu" id="mobile-menu">
+  <button class="mobile-menu-close" onclick="closeMobileMenu()">✕</button>
+  <div id="mm-user-section"></div>
+  <button class="mm-item" onclick="closeMobileMenu();goHome()">🏠 Feed</button>
+  <button class="mm-item" onclick="closeMobileMenu();showV('about')">ℹ About</button>
+  <div class="mm-divider"></div>
+  <div id="mm-auth-section"></div>
 </div>
 
 <!-- CATBAR -->
@@ -784,7 +910,7 @@ select option { background:var(--white); color:var(--text); }
     <div class="about-masthead-title">Raajneeti</div>
     <div class="about-masthead-sub">राजनीति — The Art of Governance</div>
     <div class="about-body">
-      <p>Raajneeti is an independent platform for Indian political thought. It was built on one belief: in a democracy of 1.4 billion people, the quality of public discourse determines the quality of governance. It is developed by Tushnik Patra.</p>
+      <p>Raajneeti is an independent platform for Indian political thought. It was built on one belief: in a democracy of 1.4 billion people, the quality of public discourse determines the quality of governance.</p>
       <p>हम किसी दल के साथ नहीं हैं। हम किसी विचारधारा के प्रवक्ता नहीं हैं। हम केवल उन नागरिकों के साथ हैं जो सोचते हैं, लिखते हैं, और सवाल पूछते हैं।</p>
       <p>We are not affiliated with any party, ministry, or media conglomerate. We do not take advertising. What you read here is written by citizens, for citizens.</p>
     </div>
@@ -835,7 +961,7 @@ select option { background:var(--white); color:var(--text); }
   </div>
 </footer>
 <div class="footer-bottom">
-  <div class="fb-text">© 2026 राजनीति — Raajneeti · Independent Indian Political Discourse · सत्यमेव जयते</div>
+  <div class="fb-text">© 2025 राजनीति — Raajneeti · Independent Indian Political Discourse · सत्यमेव जयते</div>
   <div class="fb-flag">🇮🇳</div>
 </div>
 
@@ -860,8 +986,11 @@ select option { background:var(--white); color:var(--text); }
           <label class="auth-label">Username or Email</label>
           <input type="text" id="l-identifier" placeholder="your_username or email@example.com" autocomplete="username">
         </div>
-        <div class="auth-fg">
-          <label class="auth-label">Password</label>
+        <div class="auth-fg" style="margin-bottom:0;">
+          <div style="display:flex;justify-content:space-between;align-items:center;">
+            <label class="auth-label">Password</label>
+            <a onclick="setModalMode('forgot')" style="font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:1px;text-transform:uppercase;color:var(--tc-saffron);cursor:pointer;text-decoration:none;">Forgot?</a>
+          </div>
           <input type="password" id="l-password" placeholder="••••••••" autocomplete="current-password">
         </div>
       </div>
@@ -880,6 +1009,33 @@ select option { background:var(--white); color:var(--text); }
           <input type="password" id="r-password" placeholder="Min. 8 characters" autocomplete="new-password">
         </div>
       </div>
+      <!-- FORGOT PASSWORD FORM -->
+      <div id="form-forgot" style="display:none;">
+        <div class="auth-fg">
+          <label class="auth-label">Registered Email Address</label>
+          <input type="email" id="fp-email" placeholder="you@example.com" autocomplete="email">
+        </div>
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--text-dim);letter-spacing:.5px;line-height:1.6;margin-top:4px;">
+          A password reset link will be sent to your email. The link expires in 15 minutes.
+        </div>
+      </div>
+      <!-- RESET PASSWORD FORM -->
+      <div id="form-reset" style="display:none;">
+        <div class="auth-fg">
+          <label class="auth-label">New Password</label>
+          <input type="password" id="rp-password" placeholder="Enter new password" autocomplete="new-password">
+        </div>
+        <div class="auth-fg">
+          <label class="auth-label">Confirm Password</label>
+          <input type="password" id="rp-confirm" placeholder="Confirm new password" autocomplete="new-password">
+        </div>
+      </div>
+      <!-- SUCCESS PANEL -->
+      <div id="form-success" style="display:none;text-align:center;padding:12px 0;">
+        <div style="font-size:36px;margin-bottom:12px;">✉️</div>
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--tc-green);margin-bottom:8px;">Reset Link Sent</div>
+        <div style="font-family:'Crimson Pro',serif;font-size:15px;color:var(--text-mid);font-style:italic;">Check your inbox. The link expires in 15 minutes.</div>
+      </div>
     </div>
     <div class="modal-footer">
       <button class="btn btn-pub" id="auth-submit-btn" style="width:100%;" onclick="submitAuth()">Sign In</button>
@@ -895,7 +1051,7 @@ select option { background:var(--white); color:var(--text); }
 // ══════════════════════════════════════════════
 // CONFIG — point to your FastAPI backend
 // ══════════════════════════════════════════════
-const API = 'https://rajneeti-backend.onrender.com';
+const API = 'http://localhost:9000';
 
 // ══════════════════════════════════════════════
 // STATE
@@ -984,12 +1140,18 @@ function openModal(mode, cb) {
   setModalMode(authMode);
   document.getElementById('auth-modal').classList.add('open');
   clearAuthError();
+  // Close mobile menu if open
+  closeMobileMenu();
   setTimeout(() => {
-    const el = authMode === 'login'
-      ? document.getElementById('l-identifier')
-      : document.getElementById('r-username');
+    const focusMap = {
+      login:    'l-identifier',
+      register: 'r-username',
+      forgot:   'fp-email',
+      reset:    'rp-password',
+    };
+    const el = document.getElementById(focusMap[authMode] || 'l-identifier');
     if (el) el.focus();
-  }, 100);
+  }, 120);
 }
 function closeModal() {
   document.getElementById('auth-modal').classList.remove('open');
@@ -997,16 +1159,55 @@ function closeModal() {
 }
 function setModalMode(mode) {
   authMode = mode;
-  const isLogin = mode === 'login';
-  document.getElementById('form-login').style.display    = isLogin ? 'block' : 'none';
-  document.getElementById('form-register').style.display = isLogin ? 'none'  : 'block';
-  document.getElementById('modal-kicker').textContent    = isLogin ? 'Welcome Back'     : 'Join Raajneeti';
-  document.getElementById('modal-title').textContent     = isLogin ? 'Sign In'          : 'Create Account';
-  document.getElementById('modal-sub').textContent       = isLogin ? 'Sign in to publish your voice to India.' : 'Register free and start writing today.';
-  document.getElementById('auth-submit-btn').textContent = isLogin ? 'Sign In' : 'Create Account';
-  document.getElementById('modal-switch').innerHTML      = isLogin
-    ? `Don't have an account? <a onclick="toggleAuthMode()">Create one free</a>`
-    : `Already have an account? <a onclick="toggleAuthMode()">Sign in</a>`;
+  // Hide all forms first
+  ['form-login','form-register','form-forgot','form-reset','form-success'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.style.display = 'none';
+  });
+  clearAuthError();
+
+  const submitBtn = document.getElementById('auth-submit-btn');
+  const switchEl  = document.getElementById('modal-switch');
+
+  if (mode === 'login') {
+    document.getElementById('form-login').style.display     = 'block';
+    document.getElementById('modal-kicker').textContent     = 'Welcome Back';
+    document.getElementById('modal-title').textContent      = 'Sign In';
+    document.getElementById('modal-sub').textContent        = 'Sign in to publish your voice to India.';
+    submitBtn.textContent = 'Sign In'; submitBtn.style.display = 'block';
+    switchEl.innerHTML = `Don't have an account? <a onclick="setModalMode('register')">Create one free</a>
+      &nbsp;·&nbsp; <a onclick="setModalMode('forgot')">Forgot password?</a>`;
+  } else if (mode === 'register') {
+    document.getElementById('form-register').style.display  = 'block';
+    document.getElementById('modal-kicker').textContent     = 'Join Raajneeti';
+    document.getElementById('modal-title').textContent      = 'Create Account';
+    document.getElementById('modal-sub').textContent        = 'Register free and start writing today.';
+    submitBtn.textContent = 'Create Account'; submitBtn.style.display = 'block';
+    switchEl.innerHTML = `Already have an account? <a onclick="setModalMode('login')">Sign in</a>`;
+  } else if (mode === 'forgot') {
+    document.getElementById('form-forgot').style.display    = 'block';
+    document.getElementById('modal-kicker').textContent     = 'Account Recovery';
+    document.getElementById('modal-title').textContent      = 'Forgot Password';
+    document.getElementById('modal-sub').textContent        = 'We\'ll email you a secure reset link.';
+    submitBtn.textContent = 'Send Reset Link'; submitBtn.style.display = 'block';
+    switchEl.innerHTML = `Remembered it? <a onclick="setModalMode('login')">Back to sign in</a>`;
+    setTimeout(() => { const e = document.getElementById('fp-email'); if(e) e.focus(); }, 100);
+  } else if (mode === 'reset') {
+    document.getElementById('form-reset').style.display     = 'block';
+    document.getElementById('modal-kicker').textContent     = 'Set New Password';
+    document.getElementById('modal-title').textContent      = 'Reset Password';
+    document.getElementById('modal-sub').textContent        = 'Choose a strong new password.';
+    submitBtn.textContent = 'Reset Password'; submitBtn.style.display = 'block';
+    switchEl.innerHTML = `<a onclick="setModalMode('login')">Back to sign in</a>`;
+    setTimeout(() => { const e = document.getElementById('rp-password'); if(e) e.focus(); }, 100);
+  } else if (mode === 'success') {
+    document.getElementById('form-success').style.display   = 'block';
+    document.getElementById('modal-kicker').textContent     = 'Email Sent';
+    document.getElementById('modal-title').textContent      = 'Check Your Inbox';
+    document.getElementById('modal-sub').textContent        = '';
+    submitBtn.style.display = 'none';
+    switchEl.innerHTML = `<a onclick="setModalMode('login')">Back to sign in</a>`;
+  }
 }
 function toggleAuthMode() {
   clearAuthError();
@@ -1024,18 +1225,64 @@ function clearAuthError() {
 async function submitAuth() {
   clearAuthError();
   const btn = document.getElementById('auth-submit-btn');
+  const origText = btn.textContent;
   btn.disabled = true; btn.textContent = 'Please wait…';
 
   try {
-    if (authMode === 'login') {
-      await doLogin();
-    } else {
-      await doRegister();
-    }
+    if      (authMode === 'login')    await doLogin();
+    else if (authMode === 'register') await doRegister();
+    else if (authMode === 'forgot')   await doForgotPassword();
+    else if (authMode === 'reset')    await doResetPassword();
   } finally {
-    btn.disabled = false;
-    btn.textContent = authMode === 'login' ? 'Sign In' : 'Create Account';
+    btn.disabled = false; btn.textContent = origText;
   }
+}
+
+async function doForgotPassword() {
+  const email = document.getElementById('fp-email').value.trim();
+  if (!email) { showAuthError('Please enter your email address.'); return; }
+
+  // Backend: POST /forgot-password?email=... (query param)
+  const res = await fetch(`${API}/forgot-password?email=${encodeURIComponent(email)}`, {
+    method: 'POST'
+  });
+  const data = await res.json();
+
+  if (!res.ok) {
+    // 404 = email not found, but we still show success for security
+    if (res.status === 404) {
+      setModalMode('success');
+    } else {
+      showAuthError(data.detail || 'Something went wrong. Please try again.');
+    }
+    return;
+  }
+  setModalMode('success');
+}
+
+async function doResetPassword() {
+  const newPwd = document.getElementById('rp-password').value;
+  const confirm = document.getElementById('rp-confirm').value;
+  if (!newPwd || !confirm) { showAuthError('Please fill in both fields.'); return; }
+  if (newPwd.length < 6) { showAuthError('Password must be at least 6 characters.'); return; }
+  if (newPwd !== confirm) { showAuthError('Passwords do not match.'); return; }
+
+  // Get token from URL (?token=...)
+  const token = new URLSearchParams(window.location.search).get('token');
+  if (!token) { showAuthError('No reset token found in URL.'); return; }
+
+  // Backend: POST /reset-password?token=...&new_password=...
+  const res = await fetch(`${API}/reset-password?token=${encodeURIComponent(token)}&new_password=${encodeURIComponent(newPwd)}`, {
+    method: 'POST'
+  });
+  const data = await res.json();
+
+  if (!res.ok) {
+    showAuthError(data.detail || 'Reset failed. The link may have expired.');
+    return;
+  }
+  showToast('Password reset! Please sign in with your new password.');
+  setModalMode('login');
 }
 
 async function doLogin() {
@@ -1176,10 +1423,15 @@ function filterCat(cat, btn) {
   if (btn) btn.classList.add('on');
   document.getElementById('feed-cat-label').textContent =
     cat === 'all' ? 'Dispatches' : cat.split('&')[0].trim();
-  renderFeed();
-  if (!document.getElementById('v-home').classList.contains('active')) {
-    showV('home');
+
+  // Show home view immediately without scroll delay — render feed right away
+  const homeView = document.getElementById('v-home');
+  if (!homeView.classList.contains('active')) {
+    document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+    homeView.classList.add('active');
+    window.scrollTo({ top:0, behavior:'instant' });
   }
+  renderFeed();
 }
 
 // ══════════════════════════════════════════════
@@ -1550,11 +1802,83 @@ function esc(s) {
 }
 
 // ══════════════════════════════════════════════
+// MOBILE MENU
+// ══════════════════════════════════════════════
+function toggleMobileMenu() {
+  const menu = document.getElementById('mobile-menu');
+  const btn  = document.getElementById('hamburger-btn');
+  if (menu.classList.contains('open')) { closeMobileMenu(); }
+  else {
+    menu.classList.add('open');
+    btn.classList.add('open');
+    document.body.style.overflow = 'hidden';
+    renderMobileMenu();
+  }
+}
+function closeMobileMenu() {
+  const menu = document.getElementById('mobile-menu');
+  const btn  = document.getElementById('hamburger-btn');
+  if (menu) menu.classList.remove('open');
+  if (btn)  btn.classList.remove('open');
+  document.body.style.overflow = '';
+}
+function renderMobileMenu() {
+  const userSec = document.getElementById('mm-user-section');
+  const authSec = document.getElementById('mm-auth-section');
+  if (!userSec || !authSec) return;
+  if (currentUser) {
+    userSec.innerHTML = `
+      <div class="mm-user-info">
+        <div class="mm-avatar">${currentUser.username.charAt(0).toUpperCase()}</div>
+        <div>
+          <div class="mm-username">${esc(currentUser.username)}</div>
+          <div class="mm-email">${esc(currentUser.email)}</div>
+        </div>
+      </div>`;
+    authSec.innerHTML = `
+      <button class="mm-item write" onclick="closeMobileMenu();requireAuth(()=>showV('write'))">✍ Write Article</button>
+      <button class="mm-item" onclick="closeMobileMenu();loadMyPosts()">📝 My Articles</button>
+      <div class="mm-divider"></div>
+      <button class="mm-item logout-item" onclick="closeMobileMenu();logout()">⎋ Sign Out</button>`;
+  } else {
+    userSec.innerHTML = '';
+    authSec.innerHTML = `
+      <button class="mm-item write" onclick="closeMobileMenu();openModal('login')">🔑 Sign In</button>
+      <button class="mm-item" onclick="closeMobileMenu();openModal('register')">📝 Create Account</button>`;
+  }
+}
+
+// ══════════════════════════════════════════════
+// DYNAMIC CATBAR OFFSET — sticks exactly below masthead
+// ══════════════════════════════════════════════
+function updateCatbarTop() {
+  const mh = document.querySelector('.masthead');
+  if (mh) {
+    document.documentElement.style.setProperty('--catbar-top', mh.offsetHeight + 'px');
+  }
+}
+window.addEventListener('resize', updateCatbarTop);
+if (window.ResizeObserver) {
+  const mh = document.querySelector('.masthead');
+  if (mh) new ResizeObserver(updateCatbarTop).observe(mh);
+}
+
+// ══════════════════════════════════════════════
+// CHECK FOR RESET TOKEN IN URL
+// ══════════════════════════════════════════════
+function checkResetToken() {
+  const token = new URLSearchParams(window.location.search).get('token');
+  if (token) { openModal('reset'); }
+}
+
+// ══════════════════════════════════════════════
 // INIT
 // ══════════════════════════════════════════════
 currentUser = loadSession();
 renderNav();
 loadFeed();
+updateCatbarTop();
+checkResetToken();
 </script>
 </body>
 </html>
