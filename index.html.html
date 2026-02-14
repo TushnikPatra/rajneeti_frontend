@@ -1,0 +1,1560 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>राजनीति — Raajneeti | Indian Political Discourse</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Tiro+Devanagari+Hindi:ital@0;1&family=IBM+Plex+Mono:wght@400;500;600&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:         #F4F1EC;
+  --bg2:        #FDFCFA;
+  --bg3:        #EEE9E0;
+  --bg4:        #E5DFD4;
+  --line:       rgba(30,20,10,0.10);
+  --line2:      rgba(30,20,10,0.16);
+  --text:       #1A1208;
+  --text-mid:   #4A3F30;
+  --text-dim:   #8A7B68;
+  --amber:      #C87A00;
+  --amber-lt:   #E8960C;
+  --amber-dim:  rgba(200,122,0,0.10);
+  --red:        #B03020;
+  --red-dim:    rgba(176,48,32,0.10);
+  --teal:       #0F6650;
+  --teal-lt:    #1A8A6A;
+  --teal-dim:   rgba(15,102,80,0.10);
+  --blue:       #1A4080;
+  --blue-lt:    #2860C0;
+  --white:      #FDFCFA;
+  --tc-saffron: #FF6B00;
+  --tc-white:   #FFFFFF;
+  --tc-green:   #046A38;
+  --tc-navy:    #000080;
+  --header-bg:  #12100E;
+  --header-bg2: #1C1A16;
+  --header-text:#F0EDE6;
+  --header-mid: #A8A098;
+}
+
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body {
+  background:var(--bg); color:var(--text);
+  font-family:'Crimson Pro',Georgia,serif;
+  font-size:18px; line-height:1.7; min-height:100vh; overflow-x:hidden;
+}
+body::after {
+  content:''; position:fixed; inset:0; pointer-events:none; z-index:9999;
+  opacity:.015;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* ═══ TRICOLOR TOP ═══ */
+.tricolor-top { height:7px; display:flex; overflow:hidden; }
+.tc-stripe { flex:1; position:relative; overflow:hidden; }
+.tc-stripe::after {
+  content:''; position:absolute; inset:0;
+  background:linear-gradient(90deg,transparent 0%,rgba(255,255,255,0.3) 50%,transparent 100%);
+  animation:sweep 4s ease-in-out infinite;
+}
+.tc-stripe:nth-child(2)::after { animation-delay:.4s; }
+.tc-stripe:nth-child(3)::after { animation-delay:.8s; }
+.tc-s { background:var(--tc-saffron); }
+.tc-w { background:var(--tc-white); }
+.tc-g { background:var(--tc-green); }
+@keyframes sweep { from{transform:translateX(-200%)} to{transform:translateX(200%)} }
+
+/* ═══ TOPBAR ═══ */
+.topbar {
+  background:var(--header-bg);
+  border-bottom:1px solid rgba(255,255,255,0.08);
+  padding:8px 36px;
+  display:flex; align-items:center; justify-content:space-between; gap:20px;
+}
+.topbar-date {
+  font-family:'IBM Plex Mono',monospace; font-size:10px;
+  letter-spacing:2px; color:var(--header-mid);
+  text-transform:uppercase; white-space:nowrap; line-height:1.5;
+}
+.clock-colon { animation:blink 1s step-start infinite; display:inline-block; }
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.2} }
+.topbar-hl {
+  font-family:'IBM Plex Mono',monospace; font-size:10px;
+  color:var(--header-mid); letter-spacing:.5px; flex:1; text-align:center;
+}
+.topbar-hl em { color:var(--tc-saffron); font-style:normal; font-weight:600; }
+.topbar-langs { display:flex; gap:6px; }
+.lbtn {
+  background:none; border:1px solid rgba(255,255,255,0.15);
+  color:var(--header-mid); padding:3px 9px;
+  font-size:10px; letter-spacing:1px; cursor:pointer;
+  border-radius:1px; font-family:'IBM Plex Mono',monospace; transition:all .2s;
+}
+.lbtn.on,.lbtn:hover { border-color:var(--tc-saffron); color:var(--tc-saffron); }
+
+/* ═══ MASTHEAD ═══ */
+.masthead {
+  background:var(--header-bg2);
+  border-bottom:3px solid transparent;
+  border-image:linear-gradient(90deg,var(--tc-saffron) 0%,var(--tc-saffron) 33.3%,rgba(255,255,255,0.2) 33.3%,rgba(255,255,255,0.2) 66.6%,var(--tc-green) 66.6%,var(--tc-green) 100%) 1;
+  padding:22px 36px;
+  display:grid; grid-template-columns:1fr auto 1fr; align-items:center; gap:20px;
+  position:sticky; top:0; z-index:300;
+  backdrop-filter:blur(12px); -webkit-backdrop-filter:blur(12px);
+}
+.masthead-nav { display:flex; gap:4px; align-items:center; justify-content:flex-end; }
+.brand { cursor:pointer; display:flex; flex-direction:column; gap:1px; }
+.brand-devanagari {
+  font-family:'Tiro Devanagari Hindi',serif; font-size:32px;
+  color:var(--header-text); line-height:1; letter-spacing:1px;
+  text-shadow:0 0 30px rgba(255,107,0,0.3);
+}
+.brand-roman {
+  font-family:'IBM Plex Mono',monospace; font-size:11px;
+  letter-spacing:5px; color:var(--tc-saffron); text-transform:uppercase; margin-top:3px;
+}
+.brand-sub {
+  font-family:'IBM Plex Mono',monospace; font-size:9px;
+  letter-spacing:2px; color:var(--header-mid); text-transform:uppercase; margin-top:4px;
+}
+.masthead-center { display:flex; flex-direction:column; align-items:center; gap:5px; min-width:200px; }
+.m-dividers { display:flex; gap:8px; align-items:center; justify-content:center; width:100%; }
+.m-div { width:32px; height:2px; }
+.m-div-s { background:linear-gradient(90deg,var(--tc-saffron),rgba(255,107,0,0.3)); }
+.m-div-m { background:rgba(255,255,255,0.2); width:16px; }
+.chakra {
+  font-size:22px; color:var(--tc-navy);
+  text-shadow:0 0 12px rgba(0,0,128,0.8),0 0 4px rgba(255,255,255,0.3);
+  background:rgba(255,255,255,0.9);
+  width:32px; height:32px; border-radius:50%;
+  display:flex; align-items:center; justify-content:center;
+  animation:spin 20s linear infinite; flex-shrink:0;
+}
+@keyframes spin { to{transform:rotate(360deg)} }
+.m-tagline {
+  font-family:'IBM Plex Mono',monospace; font-size:8px;
+  letter-spacing:2.5px; color:var(--header-mid); text-transform:uppercase;
+  text-align:center; width:100%; white-space:nowrap;
+}
+.npill {
+  background:none; border:1px solid transparent;
+  color:var(--header-mid); font-family:'IBM Plex Mono',monospace;
+  font-size:10px; letter-spacing:2px; text-transform:uppercase;
+  padding:8px 16px; cursor:pointer; border-radius:2px; transition:all .2s;
+}
+.npill:hover,.npill.on { color:var(--header-text); background:rgba(255,255,255,0.08); border-color:rgba(255,255,255,0.15); }
+.npill.write-btn {
+  background:var(--tc-saffron); color:var(--white);
+  font-weight:600; border-color:var(--tc-saffron);
+  box-shadow:0 0 24px rgba(255,107,0,0.3);
+}
+.npill.write-btn:hover {
+  background:#FF8C20; color:var(--white);
+  box-shadow:0 0 36px rgba(255,107,0,0.5); transform:translateY(-1px);
+}
+
+/* ─── USER BADGE in nav ─── */
+.user-badge {
+  display:flex; align-items:center; gap:8px;
+  background:rgba(255,255,255,0.06);
+  border:1px solid rgba(255,255,255,0.12);
+  border-radius:20px; padding:5px 14px 5px 6px;
+  cursor:pointer; transition:all .2s;
+  position:relative;
+}
+.user-badge:hover { background:rgba(255,255,255,0.1); }
+.user-avatar {
+  width:26px; height:26px; border-radius:50%;
+  background:var(--tc-saffron);
+  display:flex; align-items:center; justify-content:center;
+  font-family:'IBM Plex Mono',monospace; font-size:11px;
+  font-weight:700; color:white; flex-shrink:0;
+}
+.user-name {
+  font-family:'IBM Plex Mono',monospace; font-size:10px;
+  letter-spacing:1px; color:var(--header-text); text-transform:uppercase;
+}
+.user-dropdown {
+  display:none; position:absolute; top:calc(100% + 8px); right:0;
+  background:var(--header-bg2); border:1px solid rgba(255,255,255,0.12);
+  border-radius:3px; min-width:180px; z-index:400;
+  box-shadow:0 8px 32px rgba(0,0,0,0.4);
+  overflow:hidden;
+}
+.user-badge:hover .user-dropdown { display:block; }
+.ud-item {
+  display:block; width:100%; background:none; border:none;
+  text-align:left; padding:12px 16px; cursor:pointer;
+  font-family:'IBM Plex Mono',monospace; font-size:10px;
+  letter-spacing:1.5px; text-transform:uppercase;
+  color:var(--header-mid); transition:all .2s;
+  border-bottom:1px solid rgba(255,255,255,0.06);
+}
+.ud-item:last-child { border-bottom:none; }
+.ud-item:hover { background:rgba(255,255,255,0.06); color:var(--header-text); }
+.ud-item.logout { color:#E05040; }
+.ud-item.logout:hover { background:rgba(224,80,64,0.1); color:#FF6050; }
+
+/* ═══ CATBAR ═══ */
+.catbar {
+  background:var(--bg3); border-bottom:1px solid var(--line2);
+  padding:0 36px; display:flex; gap:0; overflow-x:auto; scrollbar-width:none;
+}
+.catbar::-webkit-scrollbar { display:none; }
+.cbtn {
+  background:none; border:none; color:var(--text-dim);
+  font-family:'IBM Plex Mono',monospace;
+  font-size:9px; letter-spacing:2px; text-transform:uppercase;
+  padding:12px 16px; cursor:pointer; white-space:nowrap;
+  border-bottom:2px solid transparent; transition:all .2s;
+  display:flex; flex-direction:column; align-items:center; gap:2px;
+}
+.cbtn:hover { color:var(--text-mid); }
+.cbtn.on { color:var(--tc-saffron); border-bottom-color:var(--tc-saffron); }
+.cbtn-hi { font-family:'Tiro Devanagari Hindi',serif; font-size:11px; letter-spacing:0; text-transform:none; color:inherit; opacity:.6; }
+
+/* ═══ VIEWS ═══ */
+.view { display:none; animation:fadeUp .3s ease; }
+.view.active { display:block; }
+@keyframes fadeUp { from{opacity:0;transform:translateY(5px)} to{opacity:1;transform:translateY(0)} }
+
+/* ═══ HERO ═══ */
+.hero {
+  background:#1E1C18; border-bottom:3px solid var(--tc-saffron);
+  padding:56px 36px;
+  display:grid; grid-template-columns:1fr 320px; gap:0;
+  position:relative; overflow:hidden;
+}
+.hero-grid-bg {
+  position:absolute; inset:0; pointer-events:none;
+  background-image:linear-gradient(rgba(255,255,255,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.04) 1px,transparent 1px);
+  background-size:60px 60px;
+  mask-image:linear-gradient(to bottom,transparent,rgba(0,0,0,0.5),transparent);
+}
+.hero-body { padding-right:48px; position:relative; z-index:1; display:flex; flex-direction:column; justify-content:center; }
+.hero-kicker { display:flex; align-items:center; gap:12px; margin-bottom:24px; }
+.hero-kicker-line { width:28px; height:2px; background:var(--tc-saffron); }
+.hero-kicker-text { font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:3px; text-transform:uppercase; color:var(--tc-saffron); }
+.hero h1 { font-family:'Libre Baskerville',serif; font-size:clamp(36px,4.5vw,56px); font-weight:700; line-height:1.05; color:#FDFCFA; margin-bottom:18px; letter-spacing:-.5px; }
+.hero-desc { font-family:'Crimson Pro',serif; font-size:17px; font-style:italic; color:rgba(253,252,250,0.65); max-width:520px; line-height:1.75; margin-bottom:24px; }
+.hero-devanagari { font-family:'Tiro Devanagari Hindi',serif; font-size:16px; color:rgba(253,252,250,0.5); margin-bottom:28px; font-style:italic; }
+.hero-tricolor-rule { display:flex; height:3px; width:120px; margin-bottom:28px; border-radius:2px; overflow:hidden; }
+.hero-tricolor-rule div { flex:1; }
+.hero-metrics { display:flex; gap:36px; padding-top:24px; border-top:1px solid rgba(255,255,255,0.1); }
+.metric-n { font-family:'IBM Plex Mono',monospace; font-size:30px; font-weight:600; color:var(--tc-saffron); line-height:1; }
+.metric-l { font-family:'IBM Plex Mono',monospace; font-size:9px; letter-spacing:2px; text-transform:uppercase; color:rgba(253,252,250,0.45); margin-top:4px; }
+.hero-side { border-left:1px solid rgba(255,255,255,0.08); padding:0 0 0 32px; display:flex; flex-direction:column; position:relative; z-index:1; }
+.dispatch-head { font-family:'IBM Plex Mono',monospace; font-size:9px; letter-spacing:3px; text-transform:uppercase; color:rgba(253,252,250,0.35); padding-bottom:14px; border-bottom:1px solid rgba(255,255,255,0.08); margin-bottom:20px; }
+.dispatch-head span { color:var(--tc-saffron); }
+.dispatch-item { padding:14px 0; border-bottom:1px solid rgba(255,255,255,0.07); cursor:pointer; transition:opacity .2s; }
+.dispatch-item:last-child { border-bottom:none; }
+.dispatch-item:hover { opacity:.7; }
+.dispatch-num { font-family:'IBM Plex Mono',monospace; font-size:9px; color:var(--tc-saffron); letter-spacing:1px; margin-bottom:6px; }
+.dispatch-title { font-family:'Libre Baskerville',serif; font-size:14px; line-height:1.4; color:rgba(253,252,250,0.85); }
+.dispatch-cat { font-family:'IBM Plex Mono',monospace; font-size:9px; color:rgba(253,252,250,0.35); letter-spacing:1px; text-transform:uppercase; margin-top:5px; }
+
+/* ═══ FEED ═══ */
+.feed-wrap { max-width:1320px; margin:0 auto; padding:48px 36px; display:grid; grid-template-columns:1fr 280px; gap:52px; }
+.feed-header { display:flex; align-items:baseline; justify-content:space-between; margin-bottom:28px; padding-bottom:14px; border-bottom:1px solid var(--line2); }
+.feed-h { font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:3px; text-transform:uppercase; color:var(--text); }
+.feed-h span { color:var(--tc-saffron); }
+.feed-badge { font-family:'IBM Plex Mono',monospace; font-size:10px; color:var(--text-mid); background:var(--bg3); padding:3px 10px; border-radius:1px; border:1px solid var(--line2); }
+.posts-stack { display:flex; flex-direction:column; gap:0; }
+
+.card-feature {
+  background:var(--bg2); border:1px solid var(--line2); border-top:3px solid var(--tc-saffron);
+  padding:32px 28px; cursor:pointer;
+  transition:border-color .2s,box-shadow .2s;
+  position:relative; overflow:hidden;
+  box-shadow:0 1px 4px rgba(30,20,10,0.06);
+}
+.card-feature::before { content:''; position:absolute; top:0; left:0; bottom:0; width:0; background:rgba(255,107,0,0.05); transition:width .3s ease; }
+.card-feature:hover::before { width:5px; }
+.card-feature:hover { box-shadow:0 4px 20px rgba(30,20,10,0.1); }
+
+.card-reg { background:transparent; border-bottom:1px solid var(--line); padding:24px 0; cursor:pointer; transition:padding-left .2s; display:grid; grid-template-columns:1fr auto; gap:20px; align-items:start; }
+.card-reg:hover { padding-left:8px; }
+.card-reg:first-child { border-top:1px solid var(--line); }
+
+.card-num { font-family:'IBM Plex Mono',monospace; font-size:10px; color:var(--text-dim); letter-spacing:1px; margin-bottom:10px; display:flex; align-items:center; gap:10px; }
+.card-num::after { content:''; flex:1; max-width:32px; height:1px; background:var(--line2); }
+
+.cbadge { display:inline-block; font-family:'IBM Plex Mono',monospace; font-size:9px; letter-spacing:1.5px; text-transform:uppercase; padding:3px 8px; margin-bottom:10px; border-radius:1px; }
+.cb-nat  { background:var(--red-dim); color:#E05040; border:1px solid rgba(192,57,43,.25); }
+.cb-st   { background:rgba(26,74,138,.2); color:#6090D0; border:1px solid rgba(26,74,138,.3); }
+.cb-soc  { background:var(--teal-dim); color:var(--teal-lt); border:1px solid rgba(26,122,106,.25); }
+.cb-pol  { background:var(--amber-dim); color:var(--amber); border:1px solid rgba(212,135,10,.25); }
+.cb-cit  { background:rgba(255,255,255,.04); color:var(--text-mid); border:1px solid var(--line2); }
+.cb-eco  { background:rgba(26,74,138,.15); color:#6090D0; border:1px solid rgba(26,74,138,.2); }
+.cb-int  { background:rgba(26,122,106,.1); color:var(--teal-lt); border:1px solid rgba(26,122,106,.2); }
+
+.card-title { font-family:'Libre Baskerville',serif; font-size:22px; font-weight:700; line-height:1.2; color:var(--text); margin-bottom:10px; transition:color .2s; }
+.card-feature:hover .card-title, .card-reg:hover .card-title { color:var(--tc-saffron); }
+.card-title-sm { font-family:'Libre Baskerville',serif; font-size:17px; font-weight:700; line-height:1.3; color:var(--text); margin-bottom:8px; transition:color .2s; }
+.card-reg:hover .card-title-sm { color:var(--tc-saffron); }
+.card-excerpt { font-family:'Crimson Pro',serif; font-size:16px; color:var(--text-mid); line-height:1.65; margin-bottom:16px; }
+.card-excerpt-sm { font-family:'Crimson Pro',serif; font-size:14px; color:var(--text-mid); line-height:1.6; margin-bottom:10px; }
+.card-meta { display:flex; align-items:center; gap:10px; font-family:'IBM Plex Mono',monospace; font-size:9px; letter-spacing:.5px; color:var(--text-mid); flex-wrap:wrap; }
+.cm-author { color:var(--text); font-weight:600; }
+.cm-dot { color:var(--text-dim); }
+.cm-lang { background:var(--bg4); color:var(--text-mid); padding:2px 6px; border-radius:1px; border:1px solid var(--line2); }
+.cm-state,.cm-time { color:var(--text-mid); }
+.card-idx { font-family:'IBM Plex Mono',monospace; font-size:36px; font-weight:600; color:rgba(30,20,10,0.06); line-height:1; user-select:none; flex-shrink:0; padding-top:4px; }
+
+.empty { padding:64px 0; text-align:center; }
+.empty-glyph { font-family:'Tiro Devanagari Hindi',serif; font-size:72px; color:var(--line2); margin-bottom:20px; line-height:1; }
+.empty h3 { font-family:'Libre Baskerville',serif; font-size:22px; color:var(--text-dim); margin-bottom:8px; }
+.empty p { font-family:'Crimson Pro',serif; font-size:16px; color:var(--text-dim); font-style:italic; }
+
+.loading { padding:48px 0; text-align:center; }
+.loading-spinner { width:32px; height:32px; border:3px solid var(--line2); border-top-color:var(--tc-saffron); border-radius:50%; animation:spin 0.8s linear infinite; margin:0 auto 16px; }
+.loading p { font-family:'IBM Plex Mono',monospace; font-size:10px; color:var(--text-dim); letter-spacing:2px; text-transform:uppercase; }
+
+/* ═══ SIDEBAR ═══ */
+.sidebar { display:flex; flex-direction:column; gap:24px; }
+.sw { background:var(--bg2); border:1px solid var(--line2); border-radius:2px; overflow:hidden; box-shadow:0 1px 6px rgba(30,20,10,0.05); }
+.sw-head { padding:11px 16px; border-bottom:1px solid var(--line2); display:flex; align-items:center; gap:8px; background:var(--bg3); }
+.sw-head-tick { width:2px; height:14px; background:var(--tc-saffron); }
+.sw-head-title { font-family:'IBM Plex Mono',monospace; font-size:9px; letter-spacing:2.5px; text-transform:uppercase; color:var(--text-dim); }
+.sw-body { padding:14px 16px; }
+.sw-post { padding:11px 0; border-bottom:1px solid var(--line); cursor:pointer; transition:opacity .2s; }
+.sw-post:last-child { border-bottom:none; padding-bottom:0; }
+.sw-post:hover { opacity:.65; }
+.sw-post-title { font-family:'Libre Baskerville',serif; font-size:13px; line-height:1.4; color:var(--text); margin-bottom:4px; }
+.sw-post-meta { font-family:'IBM Plex Mono',monospace; font-size:9px; color:var(--text-dim); letter-spacing:.5px; }
+.sw-tags { display:flex; flex-wrap:wrap; gap:7px; }
+.sw-tag { font-family:'IBM Plex Mono',monospace; font-size:9px; letter-spacing:1px; text-transform:uppercase; background:var(--bg3); color:var(--text-dim); border:1px solid var(--line2); padding:5px 10px; border-radius:2px; cursor:pointer; transition:all .2s; }
+.sw-tag:hover { border-color:var(--tc-saffron); color:var(--tc-saffron); background:rgba(255,107,0,0.05); }
+.sw-cta { background:linear-gradient(135deg,#1E1C18 0%,#2A2620 100%); border:1px solid rgba(255,107,0,0.2); border-top:2px solid var(--tc-saffron); padding:20px 16px; }
+.sw-cta-hi { font-family:'Tiro Devanagari Hindi',serif; font-size:20px; color:var(--tc-saffron); margin-bottom:4px; }
+.sw-cta-en { font-family:'Crimson Pro',serif; font-size:13px; font-style:italic; color:rgba(253,252,250,0.55); margin-bottom:16px; line-height:1.5; }
+
+/* ═══ FORMS / WRITE ═══ */
+.write-wrap,.read-wrap,.about-wrap { max-width:840px; margin:0 auto; padding:56px 36px; }
+.read-wrap { max-width:740px; }
+.about-wrap { max-width:860px; padding:64px 36px; }
+
+.write-head { margin-bottom:40px; padding-bottom:28px; border-bottom:1px solid var(--line2); }
+.write-head-label { font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:3px; text-transform:uppercase; color:var(--tc-saffron); margin-bottom:14px; display:flex; align-items:center; gap:12px; }
+.write-head-label::before { content:''; width:20px; height:1px; background:var(--tc-saffron); }
+.write-head h2 { font-family:'Libre Baskerville',serif; font-size:38px; font-weight:700; color:var(--text); line-height:1.1; margin-bottom:10px; }
+.write-head-sub { font-family:'Crimson Pro',serif; font-size:16px; font-style:italic; color:var(--text-mid); }
+
+.guidelines { background:rgba(255,107,0,0.04); border:1px solid rgba(255,107,0,0.15); border-left:3px solid var(--tc-saffron); padding:18px 20px; margin-bottom:28px; }
+.guidelines-title { font-family:'IBM Plex Mono',monospace; font-size:9px; letter-spacing:2px; text-transform:uppercase; color:var(--tc-saffron); margin-bottom:12px; }
+.guidelines ul { list-style:none; display:flex; flex-direction:column; gap:7px; }
+.guidelines li { font-family:'Crimson Pro',serif; font-size:15px; color:var(--text-mid); padding-left:20px; position:relative; }
+.guidelines li::before { content:'—'; position:absolute; left:0; color:var(--text-dim); }
+
+.fs { background:var(--bg2); border:1px solid var(--line2); border-radius:2px; padding:26px; margin-bottom:16px; box-shadow:0 1px 4px rgba(30,20,10,0.04); }
+.fs-title { font-family:'IBM Plex Mono',monospace; font-size:9px; letter-spacing:2px; text-transform:uppercase; color:var(--tc-saffron); margin-bottom:20px; padding-bottom:12px; border-bottom:1px solid var(--line2); }
+.fgrid { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+.fg { display:flex; flex-direction:column; gap:7px; margin-bottom:16px; }
+.fg:last-child { margin-bottom:0; }
+.fl { font-family:'IBM Plex Mono',monospace; font-size:9px; letter-spacing:2px; text-transform:uppercase; color:var(--text-dim); }
+
+input[type="text"],input[type="email"],input[type="password"],select,textarea {
+  width:100%; background:var(--white);
+  border:1.5px solid var(--line2); border-radius:2px; padding:11px 14px;
+  font-family:'Crimson Pro',serif; font-size:16px; color:var(--text);
+  outline:none; appearance:none; transition:border-color .2s,box-shadow .2s;
+}
+input:focus,select:focus,textarea:focus { border-color:var(--tc-saffron); box-shadow:0 0 0 3px rgba(255,107,0,0.08); }
+input::placeholder,textarea::placeholder { color:var(--text-dim); }
+.headline-input { font-family:'Libre Baskerville',serif !important; font-size:22px !important; font-weight:700 !important; padding:14px !important; color:var(--text) !important; }
+textarea { resize:vertical; min-height:320px; line-height:1.8; }
+select { background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath fill='%238A7B68' d='M5 6L0 0h10z'/%3E%3C/svg%3E"); background-repeat:no-repeat; background-position:right 14px center; padding-right:36px; cursor:pointer; background-color:var(--white); }
+select option { background:var(--white); color:var(--text); }
+.char-c { font-family:'IBM Plex Mono',monospace; font-size:9px; color:var(--text-dim); text-align:right; margin-top:5px; letter-spacing:.5px; }
+.form-actions { display:flex; gap:12px; align-items:center; padding-top:20px; border-top:1px solid var(--line); margin-top:4px; }
+
+.btn { padding:12px 28px; border:none; border-radius:1px; cursor:pointer; font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:2px; text-transform:uppercase; transition:all .2s; }
+.btn-pub { background:var(--tc-saffron); color:var(--white); font-weight:600; box-shadow:0 0 20px rgba(255,107,0,0.25); }
+.btn-pub:hover { background:#FF8C20; box-shadow:0 0 32px rgba(255,107,0,0.45); transform:translateY(-1px); }
+.btn-clr { background:transparent; color:var(--text-dim); border:1px solid var(--line2); }
+.btn-clr:hover { border-color:var(--text-dim); color:var(--text-mid); }
+.btn-ghost { background:transparent; color:var(--tc-saffron); border:1px solid var(--tc-saffron); }
+.btn-ghost:hover { background:rgba(255,107,0,0.06); }
+
+.success-msg { display:none; background:rgba(4,106,56,0.08); color:var(--teal); border:1px solid rgba(4,106,56,0.2); border-left:3px solid var(--tc-green); padding:14px 18px; margin-bottom:22px; font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:1.5px; text-transform:uppercase; animation:fadeUp .3s ease; }
+.error-msg { display:none; background:rgba(176,48,32,0.07); color:var(--red); border:1px solid rgba(176,48,32,0.2); border-left:3px solid var(--red); padding:14px 18px; margin-bottom:22px; font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:1px; text-transform:uppercase; animation:fadeUp .3s ease; }
+
+/* ═══ AUTH MODAL ═══ */
+.modal-overlay {
+  display:none; position:fixed; inset:0; z-index:1000;
+  background:rgba(10,8,6,0.7); backdrop-filter:blur(4px);
+  align-items:center; justify-content:center;
+}
+.modal-overlay.open { display:flex; }
+.modal {
+  background:var(--bg2); border:1px solid var(--line2);
+  border-top:3px solid var(--tc-saffron);
+  width:100%; max-width:460px; margin:20px;
+  border-radius:3px; box-shadow:0 24px 80px rgba(0,0,0,0.3);
+  animation:fadeUp .25s ease;
+  position:relative;
+}
+.modal-header { padding:28px 28px 0; }
+.modal-kicker { font-family:'IBM Plex Mono',monospace; font-size:9px; letter-spacing:3px; text-transform:uppercase; color:var(--tc-saffron); margin-bottom:8px; }
+.modal-title { font-family:'Libre Baskerville',serif; font-size:28px; font-weight:700; color:var(--text); margin-bottom:4px; }
+.modal-sub { font-family:'Crimson Pro',serif; font-size:15px; font-style:italic; color:var(--text-dim); }
+.modal-body { padding:24px 28px; }
+.modal-close { position:absolute; top:16px; right:16px; background:none; border:none; cursor:pointer; color:var(--text-dim); font-size:20px; line-height:1; transition:color .2s; }
+.modal-close:hover { color:var(--text); }
+.modal-footer { padding:0 28px 24px; display:flex; flex-direction:column; gap:12px; align-items:center; }
+.modal-switch { font-family:'IBM Plex Mono',monospace; font-size:9px; letter-spacing:1px; color:var(--text-dim); text-transform:uppercase; }
+.modal-switch a { color:var(--tc-saffron); cursor:pointer; text-decoration:none; font-weight:600; }
+.modal-switch a:hover { text-decoration:underline; }
+
+.modal-tricolor { display:flex; height:3px; width:100%; overflow:hidden; }
+.modal-tricolor div { flex:1; }
+
+.auth-fg { display:flex; flex-direction:column; gap:6px; margin-bottom:16px; }
+.auth-fg:last-child { margin-bottom:0; }
+.auth-label { font-family:'IBM Plex Mono',monospace; font-size:9px; letter-spacing:2px; text-transform:uppercase; color:var(--text-dim); }
+
+/* ═══ READ ═══ */
+.read-back { display:inline-flex; align-items:center; gap:8px; font-family:'IBM Plex Mono',monospace; font-size:9px; letter-spacing:2px; text-transform:uppercase; color:var(--text-dim); cursor:pointer; background:none; border:none; padding:0; margin-bottom:40px; transition:color .2s; }
+.read-back:hover { color:var(--tc-saffron); }
+.read-back::before { content:'←'; font-size:14px; }
+.read-catrow { display:flex; align-items:center; gap:12px; margin-bottom:18px; }
+.read-state { font-family:'IBM Plex Mono',monospace; font-size:9px; letter-spacing:1.5px; color:var(--text-dim); text-transform:uppercase; }
+.read-title { font-family:'Libre Baskerville',serif; font-size:clamp(28px,5vw,46px); font-weight:700; color:var(--text); line-height:1.1; margin-bottom:24px; letter-spacing:-.5px; }
+.read-metabar { display:flex; align-items:center; gap:14px; padding:16px 0; margin-bottom:40px; border-top:1px solid var(--line2); border-bottom:1px solid var(--line2); flex-wrap:wrap; }
+.author-pip { width:34px; height:34px; border-radius:50%; background:var(--tc-saffron); display:flex; align-items:center; justify-content:center; font-family:'IBM Plex Mono',monospace; font-size:13px; font-weight:600; color:white; flex-shrink:0; }
+.ra-name { font-family:'IBM Plex Mono',monospace; font-size:11px; font-weight:600; color:var(--text); letter-spacing:.5px; }
+.ra-date { font-family:'IBM Plex Mono',monospace; font-size:9px; color:var(--text-dim); letter-spacing:.5px; }
+.ra-lang { margin-left:auto; background:var(--bg3); color:var(--text-mid); border:1px solid var(--line2); padding:4px 10px; font-family:'IBM Plex Mono',monospace; font-size:9px; letter-spacing:1.5px; text-transform:uppercase; border-radius:2px; }
+.read-body { font-family:'Crimson Pro',serif; font-size:18px; line-height:1.9; color:var(--text); }
+.read-body p { margin-bottom:1.6em; }
+.read-body p:first-child::first-letter { font-family:'Libre Baskerville',serif; font-size:76px; font-weight:700; float:left; line-height:.75; margin:10px 14px 0 0; color:var(--tc-saffron); }
+.read-rule-text { text-align:center; margin:40px 0; font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:4px; color:var(--text-dim); }
+.read-footer { padding-top:24px; border-top:1px solid var(--line2); display:flex; justify-content:space-between; align-items:center; gap:16px; }
+.read-footer-sig { font-family:'IBM Plex Mono',monospace; font-size:9px; letter-spacing:2px; text-transform:uppercase; color:var(--text-mid); display:flex; align-items:center; gap:10px; }
+.read-footer-sig span { color:var(--tc-saffron); }
+.read-tricolor { display:flex; height:4px; width:60px; border-radius:2px; overflow:hidden; }
+.read-tricolor div { flex:1; }
+.btn-del { background:transparent; color:var(--red); border:1px solid rgba(192,57,43,.3); padding:7px 16px; border-radius:1px; cursor:pointer; font-family:'IBM Plex Mono',monospace; font-size:9px; letter-spacing:1.5px; text-transform:uppercase; transition:all .2s; }
+.btn-del:hover { background:var(--red-dim); border-color:var(--red); }
+
+/* ═══ MY POSTS ═══ */
+.my-posts-wrap { max-width:840px; margin:0 auto; padding:56px 36px; }
+.my-posts-head { margin-bottom:32px; padding-bottom:20px; border-bottom:1px solid var(--line2); display:flex; align-items:flex-start; justify-content:space-between; gap:20px; flex-wrap:wrap; }
+.my-posts-head h2 { font-family:'Libre Baskerville',serif; font-size:32px; font-weight:700; color:var(--text); }
+.my-posts-sub { font-family:'Crimson Pro',serif; font-size:16px; font-style:italic; color:var(--text-dim); margin-top:4px; }
+
+.my-card { background:var(--bg2); border:1px solid var(--line2); border-radius:2px; padding:20px 22px; margin-bottom:12px; display:flex; align-items:flex-start; justify-content:space-between; gap:16px; box-shadow:0 1px 4px rgba(30,20,10,0.04); transition:box-shadow .2s; }
+.my-card:hover { box-shadow:0 3px 12px rgba(30,20,10,0.08); }
+.my-card-body { flex:1; cursor:pointer; }
+.my-card-badge { margin-bottom:8px; }
+.my-card-title { font-family:'Libre Baskerville',serif; font-size:18px; font-weight:700; color:var(--text); margin-bottom:6px; line-height:1.3; }
+.my-card-body:hover .my-card-title { color:var(--tc-saffron); }
+.my-card-meta { font-family:'IBM Plex Mono',monospace; font-size:9px; color:var(--text-dim); letter-spacing:.5px; display:flex; gap:10px; flex-wrap:wrap; }
+.my-card-actions { display:flex; flex-direction:column; gap:8px; align-items:flex-end; flex-shrink:0; }
+
+/* ═══ ABOUT ═══ */
+.about-kicker { font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:3px; text-transform:uppercase; color:var(--tc-saffron); margin-bottom:18px; display:flex; align-items:center; gap:12px; }
+.about-kicker::before { content:''; width:28px; height:1px; background:var(--tc-saffron); }
+.about-masthead-title { font-family:'Libre Baskerville',serif; font-size:clamp(40px,6vw,70px); font-weight:700; color:var(--text); line-height:1.05; margin-bottom:8px; letter-spacing:-1px; }
+.about-masthead-sub { font-family:'Tiro Devanagari Hindi',serif; font-size:28px; color:var(--text-mid); margin-bottom:32px; font-style:italic; }
+.about-body { font-family:'Crimson Pro',serif; font-size:18px; line-height:1.85; color:var(--text-mid); display:flex; flex-direction:column; gap:1.5em; margin-bottom:48px; }
+.about-rule { width:48px; height:3px; background:linear-gradient(90deg,var(--tc-saffron) 0%,var(--tc-saffron) 33%,white 33%,white 66%,var(--tc-green) 66%); margin:40px 0; border-radius:2px; }
+.about-values { display:grid; grid-template-columns:1fr 1fr; gap:1px; background:var(--line2); border:1px solid var(--line2); margin-bottom:48px; }
+.av-item { background:var(--bg2); padding:28px 24px; }
+.av-icon { font-size:22px; margin-bottom:12px; }
+.av-title { font-family:'Libre Baskerville',serif; font-size:18px; font-weight:700; color:var(--text); margin-bottom:10px; }
+.av-desc { font-family:'Crimson Pro',serif; font-size:14px; color:var(--text-mid); line-height:1.65; }
+.about-quote { background:var(--bg2); border:1px solid var(--line2); border-left:3px solid var(--tc-saffron); padding:28px; }
+.about-quote-text { font-family:'Libre Baskerville',serif; font-size:22px; font-style:italic; color:var(--text); line-height:1.55; margin-bottom:12px; }
+.about-quote-attr { font-family:'IBM Plex Mono',monospace; font-size:9px; letter-spacing:2px; color:var(--text-mid); text-transform:uppercase; }
+
+/* ═══ FOOTER ═══ */
+.footer { background:var(--bg2); border-top:1px solid var(--line2); padding:40px 36px 24px; display:grid; grid-template-columns:1.2fr 1fr 1fr; gap:40px; }
+.f-brand-hi { font-family:'Tiro Devanagari Hindi',serif; font-size:26px; color:var(--text); margin-bottom:4px; }
+.f-brand-mono { font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:4px; color:var(--tc-saffron); text-transform:uppercase; margin-bottom:12px; }
+.f-brand-desc { font-family:'Crimson Pro',serif; font-size:14px; color:var(--text-mid); line-height:1.7; font-style:italic; }
+.f-tricolor { display:flex; height:3px; width:100%; margin-top:16px; border-radius:1px; overflow:hidden; }
+.f-tricolor div { flex:1; }
+.f-col-title { font-family:'IBM Plex Mono',monospace; font-size:9px; letter-spacing:2px; text-transform:uppercase; color:var(--tc-saffron); margin-bottom:16px; }
+.f-links { display:flex; flex-direction:column; gap:10px; }
+.f-link { font-family:'Crimson Pro',serif; font-size:15px; color:var(--text-mid); cursor:pointer; transition:color .2s; }
+.f-link:hover { color:var(--text); }
+.footer-bottom { background:var(--bg); border-top:1px solid var(--line2); padding:14px 36px; display:flex; align-items:center; justify-content:space-between; gap:16px; }
+.fb-text { font-family:'IBM Plex Mono',monospace; font-size:9px; letter-spacing:1px; color:var(--text-mid); }
+.fb-flag { font-size:18px; }
+
+/* ═══ RESPONSIVE ═══ */
+@media (max-width:960px) {
+  .hero { grid-template-columns:1fr; padding:40px 24px; }
+  .hero-side { display:none; }
+  .feed-wrap { grid-template-columns:1fr; padding:32px 24px; }
+  .sidebar { display:none; }
+  .footer { grid-template-columns:1fr; gap:24px; }
+}
+@media (max-width:640px) {
+  .masthead { padding:16px 20px; grid-template-columns:1fr 1fr; }
+  .masthead-center { display:none; }
+  .topbar { padding:6px 20px; }
+  .catbar { padding:0 16px; }
+  .write-wrap,.read-wrap,.about-wrap,.my-posts-wrap { padding:36px 20px; }
+  .fgrid { grid-template-columns:1fr; }
+  .about-values { grid-template-columns:1fr; }
+  .footer,.footer-bottom { padding:28px 20px; }
+}
+</style>
+</head>
+<body>
+
+<!-- TRICOLOR TOP -->
+<div class="tricolor-top">
+  <div class="tc-stripe tc-s"></div>
+  <div class="tc-stripe tc-w"></div>
+  <div class="tc-stripe tc-g"></div>
+</div>
+
+<!-- TOPBAR -->
+<div class="topbar">
+  <div class="topbar-date" id="top-date"></div>
+  <div class="topbar-hl"><em>राजनीति</em> — Independent Indian Political Discourse. No alignment. No agenda. Only truth.</div>
+  <div class="topbar-langs">
+    <button class="lbtn on" onclick="setLang(this,'EN')">EN</button>
+    <button class="lbtn" onclick="setLang(this,'HI')">हि</button>
+  </div>
+</div>
+
+<!-- MASTHEAD -->
+<div class="masthead">
+  <div class="brand" onclick="goHome()">
+    <div class="brand-devanagari">राजनीति</div>
+    <div class="brand-roman">Raajneeti</div>
+    <div class="brand-sub">Indian Political Discourse</div>
+  </div>
+  <div class="masthead-center">
+    <div class="m-dividers">
+      <div class="m-div m-div-s"></div>
+      <div class="m-div m-div-m"></div>
+      <div class="chakra">☸</div>
+      <div class="m-div m-div-m"></div>
+      <div class="m-div m-div-s"></div>
+    </div>
+    <div class="m-tagline">सत्यमेव जयते · Truth Alone Triumphs</div>
+  </div>
+  <div class="masthead-nav" id="masthead-nav">
+    <!-- rendered by JS -->
+  </div>
+</div>
+
+<!-- CATBAR -->
+<div class="catbar" id="catbar">
+  <button class="cbtn on" onclick="filterCat('all',this)">All <span class="cbtn-hi">सभी</span></button>
+  <button class="cbtn" onclick="filterCat('Indian Politics & Government',this)">National Politics <span class="cbtn-hi">राष्ट्रीय</span></button>
+  <button class="cbtn" onclick="filterCat('State-level Politics',this)">State Politics <span class="cbtn-hi">राज्य</span></button>
+  <button class="cbtn" onclick="filterCat('Social Issues & Activism',this)">Social Issues <span class="cbtn-hi">सामाजिक</span></button>
+  <button class="cbtn" onclick="filterCat('Policy Analysis & Opinion',this)">Policy &amp; Opinion <span class="cbtn-hi">नीति</span></button>
+  <button class="cbtn" onclick="filterCat('Citizen Voices',this)">Citizen Voices <span class="cbtn-hi">नागरिक</span></button>
+  <button class="cbtn" onclick="filterCat('Economy & Development',this)">Economy <span class="cbtn-hi">अर्थव्यवस्था</span></button>
+  <button class="cbtn" onclick="filterCat('International Affairs',this)">International <span class="cbtn-hi">अंतर्राष्ट्रीय</span></button>
+</div>
+
+<!-- ═══════ HOME ═══════ -->
+<div id="v-home" class="view active">
+  <div class="hero">
+    <div class="hero-grid-bg"></div>
+    <div class="hero-body">
+      <div class="hero-kicker">
+        <div class="hero-kicker-line"></div>
+        <div class="hero-kicker-text">Independent · Unaffiliated · Uncompromised</div>
+      </div>
+      <h1>India Deserves<br>Honest Political Discourse.</h1>
+      <div class="hero-desc">A platform for citizens, analysts, and activists to write about the politics that shape 1.4 billion lives — without editorial gatekeeping or ideological bias.</div>
+      <div class="hero-devanagari">जहाँ सच बोला जाता है, वहाँ लोकतंत्र जीवित रहता है।</div>
+      <div class="hero-tricolor-rule">
+        <div style="background:var(--tc-saffron)"></div>
+        <div style="background:var(--tc-white)"></div>
+        <div style="background:var(--tc-green)"></div>
+      </div>
+      <div class="hero-metrics">
+        <div class="metric"><div class="metric-n" id="m-posts">0</div><div class="metric-l">Articles</div></div>
+        <div class="metric"><div class="metric-n" id="m-authors">0</div><div class="metric-l">Voices</div></div>
+        <div class="metric"><div class="metric-n" id="m-words">0</div><div class="metric-l">Words</div></div>
+      </div>
+    </div>
+    <div class="hero-side">
+      <div class="dispatch-head">Latest Dispatch <span>▸</span></div>
+      <div id="dispatch-list">
+        <div class="dispatch-item"><div class="dispatch-num">— 01</div><div class="dispatch-title">No dispatches yet.</div><div class="dispatch-cat">Awaiting</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="feed-wrap">
+    <div>
+      <div class="feed-header">
+        <div class="feed-h">Latest <span id="feed-cat-label">Dispatches</span></div>
+        <div class="feed-badge" id="feed-badge">0 articles</div>
+      </div>
+      <div class="posts-stack" id="posts-stack">
+        <div class="loading"><div class="loading-spinner"></div><p>Loading dispatches…</p></div>
+      </div>
+    </div>
+    <aside class="sidebar">
+      <div class="sw">
+        <div class="sw-head"><div class="sw-head-tick"></div><div class="sw-head-title">Recent Articles</div></div>
+        <div class="sw-body" id="sw-recent"><div style="font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--text-dim);">Loading…</div></div>
+      </div>
+      <div class="sw">
+        <div class="sw-head"><div class="sw-head-tick"></div><div class="sw-head-title">Filter by Topic</div></div>
+        <div class="sw-body">
+          <div class="sw-tags">
+            <span class="sw-tag" onclick="filterCat('Indian Politics & Government',null);goHome()">National</span>
+            <span class="sw-tag" onclick="filterCat('State-level Politics',null);goHome()">State</span>
+            <span class="sw-tag" onclick="filterCat('Social Issues & Activism',null);goHome()">Social</span>
+            <span class="sw-tag" onclick="filterCat('Policy Analysis & Opinion',null);goHome()">Policy</span>
+            <span class="sw-tag" onclick="filterCat('Citizen Voices',null);goHome()">Citizens</span>
+            <span class="sw-tag" onclick="filterCat('Economy & Development',null);goHome()">Economy</span>
+            <span class="sw-tag" onclick="filterCat('International Affairs',null);goHome()">World</span>
+          </div>
+        </div>
+      </div>
+      <div class="sw-cta">
+        <div class="sw-cta-hi">लिखिए</div>
+        <div class="sw-cta-en">"Write what disturbs you, what you fear, what you have not been willing to speak about." — Natalie Goldberg</div>
+        <button class="btn btn-pub" style="width:100%;" onclick="requireAuth(()=>showV('write'))">Write an Article</button>
+      </div>
+    </aside>
+  </div>
+</div>
+
+<!-- ═══════ WRITE ═══════ -->
+<div id="v-write" class="view">
+  <div class="write-wrap">
+    <div class="write-head">
+      <div class="write-head-label">Submission Desk</div>
+      <h2>Write Your Article</h2>
+      <div class="write-head-sub">अपनी बात कहिए — Speak your truth. All perspectives welcome.</div>
+    </div>
+    <div class="success-msg" id="success-msg">✓ &nbsp; आपका लेख प्रकाशित हो गया — Article published successfully.</div>
+    <div class="error-msg" id="write-error"></div>
+    <div class="guidelines">
+      <div class="guidelines-title">Editorial Guidelines</div>
+      <ul>
+        <li>Write factually. Opinions must be grounded in reasoning, not rumour.</li>
+        <li>You may write in English, Hindi, or any Indian language — including Hinglish.</li>
+        <li>Critique policies, systems, and positions — not individuals personally.</li>
+        <li>All political viewpoints are welcome. We have no party affiliation.</li>
+        <li>Responsible journalism protects democracy. Write accordingly.</li>
+      </ul>
+    </div>
+    <form id="write-form" onsubmit="publish(event)">
+      <div class="fs">
+        <div class="fs-title">01 — Article Details</div>
+        <div class="fg">
+          <label class="fl">Headline / शीर्षक</label>
+          <input type="text" class="headline-input" id="f-title" placeholder="Write a headline that demands attention..." maxlength="160" required oninput="cc('f-title','cc-title',160)">
+          <div class="char-c"><span id="cc-title">0</span>/160 characters</div>
+        </div>
+        <div class="fgrid">
+          <div class="fg">
+            <label class="fl">Category / श्रेणी</label>
+            <select id="f-cat">
+              <option value="Indian Politics & Government">🏛  National Politics &amp; Government</option>
+              <option value="State-level Politics">🗺  State-level Politics</option>
+              <option value="Social Issues & Activism">✊  Social Issues &amp; Activism</option>
+              <option value="Policy Analysis & Opinion">📜  Policy Analysis &amp; Opinion</option>
+              <option value="Citizen Voices">🗣  Citizen Voices</option>
+              <option value="Economy & Development">📈  Economy &amp; Development</option>
+              <option value="International Affairs">🌏  International Affairs</option>
+            </select>
+          </div>
+          <div class="fg">
+            <label class="fl">Language / भाषा</label>
+            <select id="f-lang">
+              <option>English</option>
+              <option>हिंदी — Hindi</option>
+              <option>Hinglish (Mix)</option>
+              <option>বাংলা — Bengali</option>
+              <option>தமிழ் — Tamil</option>
+              <option>తెలుగు — Telugu</option>
+              <option>मराठी — Marathi</option>
+              <option>ગુજરાતી — Gujarati</option>
+              <option>ಕನ್ನಡ — Kannada</option>
+              <option>മലയാളം — Malayalam</option>
+              <option>ਪੰਜਾਬੀ — Punjabi</option>
+              <option>অসমীয়া — Assamese</option>
+              <option>ଓଡ଼ିଆ — Odia</option>
+              <option>Other Regional</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="fs">
+        <div class="fs-title">02 — Location</div>
+        <div class="fg">
+          <label class="fl">State / Union Territory</label>
+          <select id="f-state">
+            <option value="">— Select your state —</option>
+            <option>Andhra Pradesh</option><option>Arunachal Pradesh</option>
+            <option>Assam</option><option>Bihar</option><option>Chhattisgarh</option>
+            <option>Goa</option><option>Gujarat</option><option>Haryana</option>
+            <option>Himachal Pradesh</option><option>Jharkhand</option>
+            <option>Karnataka</option><option>Kerala</option>
+            <option>Madhya Pradesh</option><option>Maharashtra</option>
+            <option>Manipur</option><option>Meghalaya</option><option>Mizoram</option>
+            <option>Nagaland</option><option>Odisha</option><option>Punjab</option>
+            <option>Rajasthan</option><option>Sikkim</option>
+            <option>Tamil Nadu</option><option>Telangana</option><option>Tripura</option>
+            <option>Uttar Pradesh</option><option>Uttarakhand</option><option>West Bengal</option>
+            <option>Delhi (NCT)</option><option>Jammu &amp; Kashmir</option>
+            <option>Ladakh</option><option>Puducherry</option>
+            <option>Chandigarh</option><option>Other / NRI / Diaspora</option>
+          </select>
+        </div>
+      </div>
+      <div class="fs">
+        <div class="fs-title">03 — Article Body / लेख</div>
+        <div class="fg">
+          <label class="fl">Your Article</label>
+          <textarea id="f-body" placeholder="Write your article here. You can write in English, Hindi, or any Indian language.&#10;&#10;आप यहाँ अपने विचार लिख सकते हैं।" required maxlength="20000" oninput="cc('f-body','cc-body',20000)"></textarea>
+          <div class="char-c"><span id="cc-body">0</span> / 20,000 characters</div>
+        </div>
+      </div>
+      <div class="form-actions">
+        <button type="submit" class="btn btn-pub" id="publish-btn">▶ Publish Article</button>
+        <button type="button" class="btn btn-clr" onclick="clearForm()">Clear</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- ═══════ READ ═══════ -->
+<div id="v-read" class="view">
+  <div class="read-wrap">
+    <button class="read-back" onclick="goHome()">Back to feed</button>
+    <div class="read-catrow">
+      <span class="cbadge" id="r-cat-badge"></span>
+      <span class="read-state" id="r-state"></span>
+    </div>
+    <h1 class="read-title" id="r-title"></h1>
+    <div class="read-metabar">
+      <div class="author-pip" id="r-pip">A</div>
+      <div>
+        <div class="ra-name" id="r-name">Anonymous</div>
+        <div class="ra-date" id="r-date"></div>
+      </div>
+      <div class="ra-lang" id="r-lang">English</div>
+    </div>
+    <div class="read-body" id="r-body"></div>
+    <div class="read-rule-text">— END OF ARTICLE —</div>
+    <div class="read-footer">
+      <div style="display:flex;align-items:center;gap:14px;">
+        <div class="read-tricolor">
+          <div style="background:var(--tc-saffron)"></div>
+          <div style="background:var(--tc-white)"></div>
+          <div style="background:var(--tc-green)"></div>
+        </div>
+        <div class="read-footer-sig">Published on <span>राजनीति · Raajneeti</span></div>
+      </div>
+      <button class="btn-del" id="del-btn" style="display:none;" onclick="delPost()">Delete Article</button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════ MY POSTS ═══════ -->
+<div id="v-myposts" class="view">
+  <div class="my-posts-wrap">
+    <div class="my-posts-head">
+      <div>
+        <h2>My Articles</h2>
+        <div class="my-posts-sub" id="my-posts-sub">Your published dispatches.</div>
+      </div>
+      <button class="btn btn-pub" onclick="showV('write')">✍ Write New</button>
+    </div>
+    <div id="my-posts-stack">
+      <div class="loading"><div class="loading-spinner"></div><p>Loading your articles…</p></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════ ABOUT ═══════ -->
+<div id="v-about" class="view">
+  <div class="about-wrap">
+    <div class="about-kicker">About This Platform</div>
+    <div class="about-masthead-title">Raajneeti</div>
+    <div class="about-masthead-sub">राजनीति — The Art of Governance</div>
+    <div class="about-body">
+      <p>Raajneeti is an independent platform developed by Tushnik Patra for Indian political thought. It was built on one belief: in a democracy of 1.4 billion people, the quality of public discourse determines the quality of governance.</p>
+      <p>हम किसी दल के साथ नहीं हैं। हम किसी विचारधारा के प्रवक्ता नहीं हैं। हम केवल उन नागरिकों के साथ हैं जो सोचते हैं, लिखते हैं, और सवाल पूछते हैं।</p>
+      <p>We are not affiliated with any party, ministry, or media conglomerate. We do not take advertising. What you read here is written by citizens, for citizens.</p>
+    </div>
+    <div class="about-rule"></div>
+    <div class="about-values">
+      <div class="av-item"><div class="av-icon">🏛️</div><div class="av-title">All Political Views</div><div class="av-desc">Left, right, centre — every perspective deserves a hearing. Democracy dies when only one side speaks.</div></div>
+      <div class="av-item"><div class="av-icon">🗣️</div><div class="av-title">All Indian Languages</div><div class="av-desc">Write in Hindi, Bengali, Tamil, Telugu, Marathi, Kannada, or any of India's 22 scheduled languages.</div></div>
+      <div class="av-item"><div class="av-icon">📍</div><div class="av-title">All 28 States</div><div class="av-desc">From Nagaland to Gujarat, from Ladakh to Tamil Nadu — every region has stories that deserve national attention.</div></div>
+      <div class="av-item"><div class="av-icon">⚖️</div><div class="av-title">Responsible Discourse</div><div class="av-desc">Free speech and responsible journalism are not opposites. We hold both values simultaneously, without compromise.</div></div>
+    </div>
+    <div class="about-quote">
+      <div class="about-quote-text">"The most powerful weapon in the hands of the oppressor is the mind of the oppressed. And the most powerful weapon in the hands of a citizen is a pen."</div>
+      <div class="about-quote-attr">— Adapted for democratic India</div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div>
+    <div class="f-brand-hi">राजनीति</div>
+    <div class="f-brand-mono">Raajneeti</div>
+    <div class="f-brand-desc">An independent platform for Indian political discourse. No party affiliation. No editorial agenda. Only citizens speaking truth.</div>
+    <div class="f-tricolor">
+      <div style="background:var(--tc-saffron)"></div>
+      <div style="background:var(--tc-white)"></div>
+      <div style="background:var(--tc-green)"></div>
+    </div>
+  </div>
+  <div>
+    <div class="f-col-title">Topics</div>
+    <div class="f-links">
+      <span class="f-link" onclick="filterCat('Indian Politics & Government',null);goHome()">National Politics</span>
+      <span class="f-link" onclick="filterCat('State-level Politics',null);goHome()">State Politics</span>
+      <span class="f-link" onclick="filterCat('Social Issues & Activism',null);goHome()">Social Issues</span>
+      <span class="f-link" onclick="filterCat('Policy Analysis & Opinion',null);goHome()">Policy &amp; Opinion</span>
+      <span class="f-link" onclick="filterCat('Citizen Voices',null);goHome()">Citizen Voices</span>
+    </div>
+  </div>
+  <div>
+    <div class="f-col-title">Platform</div>
+    <div class="f-links">
+      <span class="f-link" onclick="goHome()">Read Articles</span>
+      <span class="f-link" onclick="requireAuth(()=>showV('write'))">Write an Article</span>
+      <span class="f-link" onclick="requireAuth(()=>loadMyPosts())">My Articles</span>
+      <span class="f-link" onclick="showV('about')">About Raajneeti</span>
+    </div>
+  </div>
+</footer>
+<div class="footer-bottom">
+  <div class="fb-text">© 2026 राजनीति — Raajneeti · Independent Indian Political Discourse · सत्यमेव जयते</div>
+  <div class="fb-flag">🇮🇳</div>
+</div>
+
+<!-- ═══════ AUTH MODAL ═══════ -->
+<div class="modal-overlay" id="auth-modal">
+  <div class="modal">
+    <div class="modal-tricolor">
+      <div style="background:var(--tc-saffron)"></div>
+      <div style="background:rgba(200,200,200,0.5)"></div>
+      <div style="background:var(--tc-green)"></div>
+    </div>
+    <div class="modal-header">
+      <div class="modal-kicker" id="modal-kicker">Welcome Back</div>
+      <div class="modal-title" id="modal-title">Sign In</div>
+      <div class="modal-sub" id="modal-sub">Sign in to publish your voice to India.</div>
+    </div>
+    <div class="modal-body">
+      <div class="error-msg" id="auth-error" style="margin-bottom:16px;"></div>
+      <!-- LOGIN FORM -->
+      <div id="form-login">
+        <div class="auth-fg">
+          <label class="auth-label">Username or Email</label>
+          <input type="text" id="l-identifier" placeholder="your_username or email@example.com" autocomplete="username">
+        </div>
+        <div class="auth-fg">
+          <label class="auth-label">Password</label>
+          <input type="password" id="l-password" placeholder="••••••••" autocomplete="current-password">
+        </div>
+      </div>
+      <!-- REGISTER FORM -->
+      <div id="form-register" style="display:none;">
+        <div class="auth-fg">
+          <label class="auth-label">Username</label>
+          <input type="text" id="r-username" placeholder="your_username" autocomplete="username">
+        </div>
+        <div class="auth-fg">
+          <label class="auth-label">Email Address</label>
+          <input type="email" id="r-email" placeholder="you@example.com" autocomplete="email">
+        </div>
+        <div class="auth-fg">
+          <label class="auth-label">Password</label>
+          <input type="password" id="r-password" placeholder="Min. 8 characters" autocomplete="new-password">
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-pub" id="auth-submit-btn" style="width:100%;" onclick="submitAuth()">Sign In</button>
+      <div class="modal-switch" id="modal-switch">
+        Don't have an account? <a onclick="toggleAuthMode()">Create one free</a>
+      </div>
+    </div>
+    <button class="modal-close" onclick="closeModal()">✕</button>
+  </div>
+</div>
+
+<script>
+// ══════════════════════════════════════════════
+// CONFIG — point to your FastAPI backend
+// ══════════════════════════════════════════════
+const API = 'https://rajneeti-backend.onrender.com';
+
+// ══════════════════════════════════════════════
+// STATE
+// ══════════════════════════════════════════════
+let currentUser = null;   // { username, email, token }
+let allPosts     = [];    // all fetched posts
+let curPostId    = null;  // id of currently-read post
+let curPostOwnerId = null;// user_id of post being read
+let activeFilter = 'all';
+let authMode     = 'login'; // 'login' | 'register'
+let authCallback = null;    // fn to call after successful auth
+
+const CAT_CLASS = {
+  'Indian Politics & Government': 'cb-nat',
+  'State-level Politics':         'cb-st',
+  'Social Issues & Activism':     'cb-soc',
+  'Policy Analysis & Opinion':    'cb-pol',
+  'Citizen Voices':               'cb-cit',
+  'Economy & Development':        'cb-eco',
+  'International Affairs':        'cb-int',
+};
+
+// ══════════════════════════════════════════════
+// SESSION PERSISTENCE
+// ══════════════════════════════════════════════
+function saveSession(u) {
+  if (u) localStorage.setItem('rn_session', JSON.stringify(u));
+  else   localStorage.removeItem('rn_session');
+}
+function loadSession() {
+  try { return JSON.parse(localStorage.getItem('rn_session') || 'null'); }
+  catch { return null; }
+}
+
+// ══════════════════════════════════════════════
+// CLOCK
+// ══════════════════════════════════════════════
+function updateClock() {
+  const d = new Date();
+  const DAYS   = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+  const MONTHS = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  const hh = String(d.getHours()).padStart(2,'0');
+  const mm = String(d.getMinutes()).padStart(2,'0');
+  const ss = String(d.getSeconds()).padStart(2,'0');
+  document.getElementById('top-date').innerHTML =
+    `<span style="display:block;">${DAYS[d.getDay()]}, ${String(d.getDate()).padStart(2,'0')} ${MONTHS[d.getMonth()]} ${d.getFullYear()}</span>`+
+    `<span style="display:block;color:var(--tc-saffron);letter-spacing:2px;font-size:11px;margin-top:2px;">${hh}<span class="clock-colon">:</span>${mm}<span class="clock-colon">:</span>${ss}</span>`;
+}
+updateClock(); setInterval(updateClock, 1000);
+
+// ══════════════════════════════════════════════
+// NAV RENDERING
+// ══════════════════════════════════════════════
+function renderNav() {
+  const nav = document.getElementById('masthead-nav');
+  if (currentUser) {
+    nav.innerHTML = `
+      <button class="npill" onclick="goHome()">Feed</button>
+      <button class="npill" onclick="showV('about')">About</button>
+      <button class="npill" onclick="loadMyPosts()">My Articles</button>
+      <div class="user-badge">
+        <div class="user-avatar">${currentUser.username.charAt(0).toUpperCase()}</div>
+        <div class="user-name">${esc(currentUser.username)}</div>
+        <div class="user-dropdown">
+          <button class="ud-item" onclick="loadMyPosts()">📝 My Articles</button>
+          <button class="ud-item" onclick="showV('write')">✍ Write Article</button>
+          <button class="ud-item logout" onclick="logout()">⎋ Sign Out</button>
+        </div>
+      </div>
+      <button class="npill write-btn" onclick="showV('write')">✍ Write</button>`;
+  } else {
+    nav.innerHTML = `
+      <button class="npill" onclick="goHome()">Feed</button>
+      <button class="npill" onclick="showV('about')">About</button>
+      <button class="npill" onclick="openModal('login')">Sign In</button>
+      <button class="npill write-btn" onclick="openModal('login',()=>showV('write'))">✍ Write</button>`;
+  }
+}
+
+// ══════════════════════════════════════════════
+// AUTH MODAL
+// ══════════════════════════════════════════════
+function openModal(mode, cb) {
+  authCallback = cb || null;
+  authMode = mode || 'login';
+  setModalMode(authMode);
+  document.getElementById('auth-modal').classList.add('open');
+  clearAuthError();
+  setTimeout(() => {
+    const el = authMode === 'login'
+      ? document.getElementById('l-identifier')
+      : document.getElementById('r-username');
+    if (el) el.focus();
+  }, 100);
+}
+function closeModal() {
+  document.getElementById('auth-modal').classList.remove('open');
+  authCallback = null;
+}
+function setModalMode(mode) {
+  authMode = mode;
+  const isLogin = mode === 'login';
+  document.getElementById('form-login').style.display    = isLogin ? 'block' : 'none';
+  document.getElementById('form-register').style.display = isLogin ? 'none'  : 'block';
+  document.getElementById('modal-kicker').textContent    = isLogin ? 'Welcome Back'     : 'Join Raajneeti';
+  document.getElementById('modal-title').textContent     = isLogin ? 'Sign In'          : 'Create Account';
+  document.getElementById('modal-sub').textContent       = isLogin ? 'Sign in to publish your voice to India.' : 'Register free and start writing today.';
+  document.getElementById('auth-submit-btn').textContent = isLogin ? 'Sign In' : 'Create Account';
+  document.getElementById('modal-switch').innerHTML      = isLogin
+    ? `Don't have an account? <a onclick="toggleAuthMode()">Create one free</a>`
+    : `Already have an account? <a onclick="toggleAuthMode()">Sign in</a>`;
+}
+function toggleAuthMode() {
+  clearAuthError();
+  setModalMode(authMode === 'login' ? 'register' : 'login');
+}
+function showAuthError(msg) {
+  const el = document.getElementById('auth-error');
+  el.textContent = msg; el.style.display = 'block';
+}
+function clearAuthError() {
+  const el = document.getElementById('auth-error');
+  el.textContent = ''; el.style.display = 'none';
+}
+
+async function submitAuth() {
+  clearAuthError();
+  const btn = document.getElementById('auth-submit-btn');
+  btn.disabled = true; btn.textContent = 'Please wait…';
+
+  try {
+    if (authMode === 'login') {
+      await doLogin();
+    } else {
+      await doRegister();
+    }
+  } finally {
+    btn.disabled = false;
+    btn.textContent = authMode === 'login' ? 'Sign In' : 'Create Account';
+  }
+}
+
+async function doLogin() {
+  const identifier = document.getElementById('l-identifier').value.trim();
+  const password   = document.getElementById('l-password').value;
+  if (!identifier || !password) { showAuthError('Please fill in all fields.'); return; }
+
+  // FastAPI OAuth2PasswordRequestForm expects form-encoded body
+  const form = new URLSearchParams();
+  form.append('username', identifier);
+  form.append('password', password);
+
+  const res = await fetch(`${API}/login`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+    body: form.toString()
+  });
+  const data = await res.json();
+
+  if (!res.ok) {
+    showAuthError(data.detail || 'Invalid credentials. Please try again.');
+    return;
+  }
+
+  currentUser = { username: data.username, email: data.email, token: data.access_token };
+  saveSession(currentUser);
+  closeModal();
+  renderNav();
+  refreshMyPostIds();
+  showToast(`Welcome back, ${currentUser.username}! 🇮🇳`);
+  if (authCallback) { authCallback(); authCallback = null; }
+  loadFeed();
+}
+
+async function doRegister() {
+  const username = document.getElementById('r-username').value.trim();
+  const email    = document.getElementById('r-email').value.trim();
+  const password = document.getElementById('r-password').value;
+  if (!username || !email || !password) { showAuthError('Please fill in all fields.'); return; }
+  if (password.length < 6) { showAuthError('Password must be at least 6 characters.'); return; }
+
+  const res = await fetch(`${API}/register`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ username, email, password })
+  });
+  const data = await res.json();
+
+  if (!res.ok) {
+    showAuthError(data.detail || 'Registration failed. Please try again.');
+    return;
+  }
+
+  // Auto-login after register
+  document.getElementById('l-identifier').value = username;
+  document.getElementById('l-password').value   = password;
+  setModalMode('login');
+  await doLogin();
+}
+
+function logout() {
+  currentUser = null;
+  saveSession(null);
+  myPostIds = new Set();
+  renderNav();
+  goHome();
+  showToast('You have been signed out.');
+}
+
+function requireAuth(cb) {
+  if (currentUser) { cb(); }
+  else { openModal('login', cb); }
+}
+
+// Enter key support in modal
+document.addEventListener('keydown', e => {
+  if (e.key === 'Enter' && document.getElementById('auth-modal').classList.contains('open')) {
+    submitAuth();
+  }
+  if (e.key === 'Escape' && document.getElementById('auth-modal').classList.contains('open')) {
+    closeModal();
+  }
+});
+
+// ══════════════════════════════════════════════
+// TOAST NOTIFICATION
+// ══════════════════════════════════════════════
+let _toastTimer = null;
+function showToast(msg) {
+  let t = document.getElementById('global-toast');
+  if (!t) {
+    t = document.createElement('div');
+    t.id = 'global-toast';
+    Object.assign(t.style, {
+      position:'fixed', bottom:'24px', left:'50%', transform:'translateX(-50%) translateY(20px)',
+      background:'#1C1A16', color:'#F0EDE6',
+      fontFamily:'IBM Plex Mono,monospace', fontSize:'11px', letterSpacing:'1.5px', textTransform:'uppercase',
+      padding:'12px 24px', borderRadius:'2px', zIndex:'9998',
+      boxShadow:'0 4px 24px rgba(0,0,0,0.3)',
+      border:'1px solid rgba(255,107,0,0.3)',
+      transition:'opacity .3s, transform .3s',
+      opacity:'0', whiteSpace:'nowrap',
+    });
+    document.body.appendChild(t);
+  }
+  t.textContent = msg;
+  clearTimeout(_toastTimer);
+  requestAnimationFrame(() => {
+    t.style.opacity = '1';
+    t.style.transform = 'translateX(-50%) translateY(0)';
+  });
+  _toastTimer = setTimeout(() => {
+    t.style.opacity = '0';
+    t.style.transform = 'translateX(-50%) translateY(20px)';
+  }, 3500);
+}
+
+// ══════════════════════════════════════════════
+// NAVIGATION
+// ══════════════════════════════════════════════
+function showV(name) {
+  document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+  const el = document.getElementById('v-' + name);
+  if (el) { el.classList.add('active'); }
+  window.scrollTo({ top:0, behavior:'smooth' });
+}
+function goHome() {
+  showV('home');
+  loadFeed();
+}
+function setLang(btn) {
+  document.querySelectorAll('.lbtn').forEach(b => b.classList.remove('on'));
+  btn.classList.add('on');
+}
+function filterCat(cat, btn) {
+  activeFilter = cat;
+  document.querySelectorAll('.cbtn').forEach(b => b.classList.remove('on'));
+  if (btn) btn.classList.add('on');
+  document.getElementById('feed-cat-label').textContent =
+    cat === 'all' ? 'Dispatches' : cat.split('&')[0].trim();
+  renderFeed();
+  if (!document.getElementById('v-home').classList.contains('active')) {
+    showV('home');
+  }
+}
+
+// ══════════════════════════════════════════════
+// API — FETCH POSTS
+// ══════════════════════════════════════════════
+async function loadFeed() {
+  try {
+    const res = await fetch(`${API}/posts?page=1&limit=50`);
+    if (!res.ok) throw new Error('Failed to load');
+    allPosts = await res.json();
+    renderFeed();
+  } catch (e) {
+    document.getElementById('posts-stack').innerHTML = `
+      <div class="empty">
+        <div class="empty-glyph">॥</div>
+        <h3>Could not connect to server.</h3>
+        <p>Make sure your FastAPI backend is running at <strong>${API}</strong></p>
+      </div>`;
+  }
+}
+
+// ══════════════════════════════════════════════
+// RENDER FEED
+// ══════════════════════════════════════════════
+function renderFeed() {
+  const stack    = document.getElementById('posts-stack');
+  const badge    = document.getElementById('feed-badge');
+  const dispatch = document.getElementById('dispatch-list');
+  const swRecent = document.getElementById('sw-recent');
+
+  let filtered = activeFilter === 'all'
+    ? [...allPosts]
+    : allPosts.filter(p => p.category === activeFilter);
+
+  badge.textContent = filtered.length + ' article' + (filtered.length !== 1 ? 's' : '');
+
+  // Metrics
+  const wds   = allPosts.reduce((s, p) => s + wc(p.body), 0);
+  const auths = new Set(allPosts.map(p => p.user_id)).size;
+  document.getElementById('m-posts').textContent   = allPosts.length;
+  document.getElementById('m-authors').textContent = auths;
+  document.getElementById('m-words').textContent   = wds > 999 ? (wds/1000).toFixed(1)+'k' : wds;
+
+  // Dispatch sidebar (latest 3)
+  if (allPosts.length) {
+    dispatch.innerHTML = allPosts.slice(0,3).map((p,i) => `
+      <div class="dispatch-item" onclick="readPost('${p.id}')">
+        <div class="dispatch-num">— 0${i+1}</div>
+        <div class="dispatch-title">${esc(p.title)}</div>
+        <div class="dispatch-cat">${esc(p.category||'')}</div>
+      </div>`).join('');
+  }
+
+  // Sidebar recent
+  if (allPosts.length) {
+    swRecent.innerHTML = allPosts.slice(0,5).map(p => `
+      <div class="sw-post" onclick="readPost('${p.id}')">
+        <div class="sw-post-title">${esc(p.title)}</div>
+        <div class="sw-post-meta">${esc(p.language||'EN')} · ${esc(p.state||'India')}</div>
+      </div>`).join('');
+  } else {
+    swRecent.innerHTML = `<div style="font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--text-dim);">No articles yet.</div>`;
+  }
+
+  if (!filtered.length) {
+    stack.innerHTML = `
+      <div class="empty">
+        <div class="empty-glyph">॥</div>
+        <h3>${activeFilter === 'all' ? 'The floor is open. The mic is open.' : 'No articles in this category yet.'}</h3>
+        <p>${activeFilter === 'all' ? 'Write the first article. India is reading.' : 'Be the first to write about ' + activeFilter + '.'}</p>
+      </div>`;
+    return;
+  }
+
+  let html = '';
+  filtered.forEach((p, i) => {
+    const cc  = CAT_CLASS[p.category] || 'cb-pol';
+    const ex  = (p.body||'').slice(0,220).trim() + ((p.body||'').length > 220 ? '…' : '');
+    const meta = `
+      <div class="card-meta">
+        <span class="cm-lang">${esc((p.language||'EN').slice(0,2).toUpperCase())}</span>
+        <span class="cm-dot">·</span>
+        <span class="cm-state">${p.state ? '📍 '+esc(p.state) : ''}</span>
+        <span class="cm-dot">·</span>
+        <span class="cm-time">${rt(p.body)} min read</span>
+      </div>`;
+
+    if (i === 0) {
+      html += `
+        <div class="card-feature" onclick="readPost('${p.id}')">
+          <div class="card-num"><span>Featured</span></div>
+          <span class="cbadge ${cc}">${esc(p.category||'')}</span>
+          <div class="card-title">${esc(p.title)}</div>
+          <div class="card-excerpt">${esc(ex)}</div>
+          ${meta}
+        </div>`;
+    } else {
+      html += `
+        <div class="card-reg" onclick="readPost('${p.id}')">
+          <div>
+            <span class="cbadge ${cc}">${esc(p.category||'')}</span>
+            <div class="card-title-sm">${esc(p.title)}</div>
+            <div class="card-excerpt-sm">${esc(ex)}</div>
+            ${meta}
+          </div>
+          <div class="card-idx">${String(i).padStart(2,'0')}</div>
+        </div>`;
+    }
+  });
+  stack.innerHTML = html;
+}
+
+// ══════════════════════════════════════════════
+// READ POST
+// ══════════════════════════════════════════════
+function readPost(id) {
+  const p = allPosts.find(x => x.id === id);
+  if (!p) return;
+  curPostId       = id;
+  curPostOwnerId  = p.user_id;
+
+  const cc = CAT_CLASS[p.category] || 'cb-pol';
+  document.getElementById('r-cat-badge').textContent = p.category||'';
+  document.getElementById('r-cat-badge').className   = 'cbadge ' + cc;
+  document.getElementById('r-state').textContent     = p.state ? '📍 ' + p.state : '';
+  document.getElementById('r-title').textContent     = p.title;
+  document.getElementById('r-pip').textContent       = (p.language||'A').charAt(0).toUpperCase();
+  document.getElementById('r-name').textContent      = 'Author';
+  document.getElementById('r-date').textContent      = (p.state||'India') + ' · ' + rt(p.body) + ' min read';
+  document.getElementById('r-lang').textContent      = (p.language||'English').split('—')[0].trim();
+
+  const paras = (p.body||'').split(/\n\n+/).filter(x => x.trim());
+  document.getElementById('r-body').innerHTML =
+    paras.map(x => `<p>${esc(x.trim()).replace(/\n/g,'<br>')}</p>`).join('');
+
+  // Show delete button ONLY if current user owns this post
+  // We do a quick /me or compare stored user_id against known posts
+  const delBtn = document.getElementById('del-btn');
+  delBtn.style.display = 'none'; // hide by default
+  if (currentUser) {
+    // We know which posts belong to current user because we track it via my-posts cache
+    checkOwnership(p.id).then(isOwner => {
+      delBtn.style.display = isOwner ? 'inline-block' : 'none';
+    });
+  }
+
+  showV('read');
+}
+
+
+// Cache of current user's post IDs for quick ownership lookup
+let myPostIds = new Set();
+
+async function refreshMyPostIds() {
+  if (!currentUser) { myPostIds = new Set(); return; }
+  try {
+    const res = await fetch(`${API}/my-posts`, {
+      headers: { 'Authorization': `Bearer ${currentUser.token}` }
+    });
+    if (!res.ok) { myPostIds = new Set(); return; }
+    const posts = await res.json();
+    myPostIds = new Set(posts.map(p => String(p.id)));
+  } catch { myPostIds = new Set(); }
+}
+
+async function checkOwnership(postId) {
+  if (!currentUser) return false;
+  if (myPostIds.has(String(postId))) return true;
+  await refreshMyPostIds();
+  return myPostIds.has(String(postId));
+}
+
+async function delPost() {
+  if (!curPostId) return;
+  if (!confirm('Permanently delete this article? This cannot be undone.')) return;
+  if (!currentUser) { openModal('login'); return; }
+
+  try {
+    const res = await fetch(`${API}/posts/${curPostId}`, {
+      method: 'DELETE',
+      headers: { 'Authorization': `Bearer ${currentUser.token}` }
+    });
+    if (!res.ok) {
+      const err = await res.json();
+      alert(err.detail || 'Delete failed.');
+      return;
+    }
+    myPostIds.delete(String(curPostId));
+    allPosts = allPosts.filter(p => p.id !== curPostId);
+    curPostId = null;
+    goHome();
+    showToast('Article deleted.');
+  } catch (e) {
+    alert('Network error. Could not delete.');
+  }
+}
+
+// ══════════════════════════════════════════════
+// PUBLISH
+// ══════════════════════════════════════════════
+async function publish(e) {
+  e.preventDefault();
+  if (!currentUser) { openModal('login', () => showV('write')); return; }
+
+  const title  = document.getElementById('f-title').value.trim();
+  const cat    = document.getElementById('f-cat').value;
+  const lang   = document.getElementById('f-lang').value;
+  const state  = document.getElementById('f-state').value;
+  const body   = document.getElementById('f-body').value.trim();
+  if (!title || !body) return;
+
+  const btn = document.getElementById('publish-btn');
+  btn.disabled = true; btn.textContent = 'Publishing…';
+  hideWriteError();
+
+  try {
+    const res = await fetch(`${API}/posts`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${currentUser.token}`
+      },
+      body: JSON.stringify({ title, body, category: cat, language: lang, state: state||'Other / NRI / Diaspora' })
+    });
+    const data = await res.json();
+
+    if (!res.ok) {
+      if (res.status === 401) {
+        showWriteError('Session expired. Please sign in again.');
+        currentUser = null; saveSession(null); renderNav();
+        openModal('login', () => showV('write'));
+      } else {
+        showWriteError(data.detail || 'Failed to publish. Please try again.');
+      }
+      return;
+    }
+
+    // Add to local cache and ownership cache
+    allPosts.unshift(data);
+    myPostIds.add(String(data.id));
+
+    const msg = document.getElementById('success-msg');
+    msg.style.display = 'block';
+    setTimeout(() => msg.style.display = 'none', 5000);
+    document.getElementById('write-form').reset();
+    ['cc-title','cc-body'].forEach(id => document.getElementById(id).textContent = '0');
+    showToast('Article published! 🇮🇳');
+  } catch (err) {
+    showWriteError('Network error. Check your connection and try again.');
+  } finally {
+    btn.disabled = false; btn.textContent = '▶ Publish Article';
+  }
+}
+
+function showWriteError(msg) {
+  const el = document.getElementById('write-error');
+  el.textContent = msg; el.style.display = 'block';
+}
+function hideWriteError() {
+  const el = document.getElementById('write-error');
+  el.style.display = 'none';
+}
+
+// ══════════════════════════════════════════════
+// MY POSTS
+// ══════════════════════════════════════════════
+async function loadMyPosts() {
+  if (!currentUser) { openModal('login', loadMyPosts); return; }
+  showV('myposts');
+  const stack = document.getElementById('my-posts-stack');
+  stack.innerHTML = '<div class="loading"><div class="loading-spinner"></div><p>Loading your articles…</p></div>';
+
+  try {
+    const res = await fetch(`${API}/my-posts`, {
+      headers: { 'Authorization': `Bearer ${currentUser.token}` }
+    });
+    if (!res.ok) throw new Error('Failed');
+    const posts = await res.json();
+    // Update ownership cache
+    myPostIds = new Set(posts.map(p => String(p.id)));
+
+    document.getElementById('my-posts-sub').textContent =
+      `${posts.length} article${posts.length !== 1 ? 's' : ''} published by ${currentUser.username}.`;
+
+    if (!posts.length) {
+      stack.innerHTML = `
+        <div class="empty">
+          <div class="empty-glyph">॥</div>
+          <h3>You haven't written anything yet.</h3>
+          <p>Your articles will appear here once you publish them.</p>
+        </div>`;
+      return;
+    }
+
+    stack.innerHTML = posts.map(p => {
+      const cc = CAT_CLASS[p.category] || 'cb-pol';
+      const ex = (p.body||'').slice(0,140).trim() + ((p.body||'').length > 140 ? '…' : '');
+      return `
+        <div class="my-card">
+          <div class="my-card-body" onclick="viewMyPost('${p.id}')">
+            <div class="my-card-badge"><span class="cbadge ${cc}">${esc(p.category||'')}</span></div>
+            <div class="my-card-title">${esc(p.title)}</div>
+            <div class="my-card-meta">
+              <span>${esc(p.language||'EN')}</span>
+              <span>·</span>
+              <span>${p.state ? '📍 '+esc(p.state) : 'India'}</span>
+              <span>·</span>
+              <span>${rt(p.body)} min read</span>
+            </div>
+          </div>
+          <div class="my-card-actions">
+            <button class="btn-del" onclick="deleteMyPost('${p.id}')">Delete</button>
+          </div>
+        </div>`;
+    }).join('');
+  } catch {
+    stack.innerHTML = `<div class="empty"><div class="empty-glyph">॥</div><h3>Could not load your articles.</h3><p>Server connection error.</p></div>`;
+  }
+}
+
+function viewMyPost(id) {
+  // Merge my-post into allPosts if not already there
+  const alreadyLoaded = allPosts.find(p => p.id === id);
+  if (alreadyLoaded) { readPost(id); return; }
+  // Fetch full post and display
+  fetch(`${API}/my-posts`, { headers:{'Authorization':`Bearer ${currentUser.token}`} })
+    .then(r => r.json())
+    .then(posts => {
+      const p = posts.find(x => x.id === id);
+      if (p && !allPosts.find(x => x.id === p.id)) allPosts.unshift(p);
+      if (p) readPost(id);
+    });
+}
+
+async function deleteMyPost(id) {
+  if (!currentUser) return;
+  if (!confirm('Delete this article permanently?')) return;
+  try {
+    const res = await fetch(`${API}/posts/${id}`, {
+      method:'DELETE',
+      headers:{'Authorization':`Bearer ${currentUser.token}`}
+    });
+    if (!res.ok) { const e = await res.json(); alert(e.detail||'Delete failed.'); return; }
+    allPosts = allPosts.filter(p => p.id !== id);
+    showToast('Article deleted.');
+    loadMyPosts(); // refresh list
+  } catch { alert('Network error.'); }
+}
+
+// ══════════════════════════════════════════════
+// HELPERS
+// ══════════════════════════════════════════════
+function clearForm() {
+  document.getElementById('write-form').reset();
+  ['cc-title','cc-body'].forEach(id => document.getElementById(id).textContent = '0');
+  hideWriteError();
+}
+function cc(inp, cnt) {
+  document.getElementById(cnt).textContent =
+    document.getElementById(inp).value.length.toLocaleString('en-IN');
+}
+function wc(t) { return (t||'').trim().split(/\s+/).filter(Boolean).length; }
+function rt(t) { return Math.max(1, Math.round(wc(t)/200)); }
+function esc(s) {
+  const d = document.createElement('div');
+  d.appendChild(document.createTextNode(String(s||'')));
+  return d.innerHTML;
+}
+
+// ══════════════════════════════════════════════
+// INIT
+// ══════════════════════════════════════════════
+currentUser = loadSession();
+renderNav();
+loadFeed();
+</script>
+</body>
+</html>
