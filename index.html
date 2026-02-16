@@ -1069,7 +1069,7 @@ select option { background:var(--white); color:var(--text); }
     <div class="about-masthead-title">Raajneeti</div>
     <div class="about-masthead-sub">राजनीति — The Art of Governance</div>
     <div class="about-body">
-      <p>Developed by Tushnik Patra, Raajneeti is an independent platform for Indian political thought. It was built on one belief: in a democracy of 1.4 billion people, the quality of public discourse determines the quality of governance.</p>
+      <p>Raajneeti is an independent platform for Indian political thought. It was built on one belief: in a democracy of 1.4 billion people, the quality of public discourse determines the quality of governance.</p>
       <p>हम किसी दल के साथ नहीं हैं। हम किसी विचारधारा के प्रवक्ता नहीं हैं। हम केवल उन नागरिकों के साथ हैं जो सोचते हैं, लिखते हैं, और सवाल पूछते हैं।</p>
       <p>We are not affiliated with any party, ministry, or media conglomerate. We do not take advertising. What you read here is written by citizens, for citizens.</p>
     </div>
@@ -1101,7 +1101,10 @@ select option { background:var(--white); color:var(--text); }
           <div class="dev-title">Creator &amp; Developer · Raajneeti</div>
           <div class="dev-bio">A passionate Computer Science undergraduate with hands-on experience in web development, data analytics, and cyber security. I enjoy building real-world solutions and learning cutting-edge technologies.</div>
           <div class="dev-socials">
-           
+            <!-- X / Twitter -->
+            <a class="dev-social-link" href="https://x.com/Tushnik004" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.746l7.73-8.835L1.254 2.25H8.08l4.253 5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+              @Tushnikp_2004
             </a>
             <!-- LinkedIn -->
             <a class="dev-social-link" href="https://www.linkedin.com/in/tushnik-patra-21195625a" target="_blank" rel="noopener">
@@ -1716,16 +1719,39 @@ function showToast(msg) {
 // ══════════════════════════════════════════════
 // NAVIGATION
 // ══════════════════════════════════════════════
-function showV(name) {
+function showV(name, pushHistory = true) {
   document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
   const el = document.getElementById('v-' + name);
   if (el) { el.classList.add('active'); }
   window.scrollTo({ top:0, behavior:'smooth' });
+  // Push to browser history so back button works
+  if (pushHistory) {
+    const state = { view: name, postId: name === 'read' ? curPostId : null };
+    const url   = name === 'home'  ? '/'
+                : name === 'read'  ? '?post=' + curPostId
+                : '?view=' + name;
+    window.history.pushState(state, '', url);
+  }
 }
 function goHome() {
   showV('home');
   loadFeed();
 }
+
+// Handle browser back / forward
+window.addEventListener('popstate', function(e) {
+  const state = e.state;
+  if (!state || state.view === 'home') {
+    showV('home', false);
+    loadFeed();
+  } else if (state.view === 'read' && state.postId) {
+    const p = allPosts.find(x => x.id === state.postId);
+    if (p) { curPostId = state.postId; readPost(state.postId, false); }
+    else   { showV('home', false); loadFeed(); }
+  } else {
+    showV(state.view, false);
+  }
+});
 function setLang(btn) {
   document.querySelectorAll('.lbtn').forEach(b => b.classList.remove('on'));
   btn.classList.add('on');
@@ -1862,7 +1888,7 @@ function renderFeed() {
 // ══════════════════════════════════════════════
 // READ POST
 // ══════════════════════════════════════════════
-function readPost(id) {
+function readPost(id, pushHistory = true) {
   const p = allPosts.find(x => x.id === id);
   if (!p) return;
   curPostId       = id;
@@ -1893,7 +1919,8 @@ function readPost(id) {
     });
   }
 
-  showV('read');
+  showV('read', false);
+  if (pushHistory) { window.history.pushState({ view: 'read', postId: id }, '', '?post=' + id); }
 }
 
 
@@ -2343,6 +2370,9 @@ renderNav();
 loadFeed();
 updateCatbarTop();
 checkResetToken();
+
+// Set initial history state so back works from the very first page
+window.history.replaceState({ view: 'home', postId: null }, '', window.location.pathname + window.location.search);
 
 // Auto-open login modal if redirected from reset-password page
 if (new URLSearchParams(window.location.search).get('login') === '1') {
