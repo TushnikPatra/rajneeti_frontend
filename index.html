@@ -1291,7 +1291,7 @@ select option { background:var(--white); color:var(--text); }
 // ══════════════════════════════════════════════
 // CONFIG — point to your FastAPI backend
 // ══════════════════════════════════════════════
-const API = 'https://rajneeti-backend.onrender.com';
+const API = 'https://raajneeti-api.onrender.com';
 
 // ══════════════════════════════════════════════
 // STATE
@@ -1511,9 +1511,11 @@ async function doResetPassword() {
   const token = new URLSearchParams(window.location.search).get('token');
   if (!token) { showAuthError('No reset token found in URL.'); return; }
 
-  // Backend: POST /reset-password?token=...&new_password=...
-  const res = await fetch(`${API}/reset-password?token=${encodeURIComponent(token)}&new_password=${encodeURIComponent(newPwd)}`, {
-    method: 'POST'
+  // Backend: POST /reset-password with JSON body (ResetPasswordRequest schema)
+  const res = await fetch(`${API}/reset-password`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ token: token, new_password: newPwd })
   });
   const data = await res.json();
 
@@ -1752,6 +1754,8 @@ function renderFeed() {
     const ex  = (p.body||'').slice(0,220).trim() + ((p.body||'').length > 220 ? '…' : '');
     const meta = `
       <div class="card-meta">
+        <span class="cm-author">${esc(p.author_username || 'Anonymous')}</span>
+        <span class="cm-dot">·</span>
         <span class="cm-lang">${esc((p.language||'EN').slice(0,2).toUpperCase())}</span>
         <span class="cm-dot">·</span>
         <span class="cm-state">${p.state ? '📍 '+esc(p.state) : ''}</span>
@@ -1798,8 +1802,8 @@ function readPost(id) {
   document.getElementById('r-cat-badge').className   = 'cbadge ' + cc;
   document.getElementById('r-state').textContent     = p.state ? '📍 ' + p.state : '';
   document.getElementById('r-title').textContent     = p.title;
-  document.getElementById('r-pip').textContent       = (p.language||'A').charAt(0).toUpperCase();
-  document.getElementById('r-name').textContent      = 'Author';
+  document.getElementById('r-pip').textContent       = (p.author_username || p.language || 'A').charAt(0).toUpperCase();
+  document.getElementById('r-name').textContent      = p.author_username || 'Anonymous';
   document.getElementById('r-date').textContent      = (p.state||'India') + ' · ' + rt(p.body) + ' min read';
   document.getElementById('r-lang').textContent      = (p.language||'English').split('—')[0].trim();
 
@@ -2169,10 +2173,14 @@ async function submitResetPage() {
   btn.disabled = true; btn.textContent = 'Resetting…';
 
   try {
-    // POST /reset-password?token=...&new_password=...
+    // POST /reset-password with JSON body (ResetPasswordRequest schema)
     const res = await fetch(
-      `${API}/reset-password?token=${encodeURIComponent(_resetToken)}&new_password=${encodeURIComponent(newPwd)}`,
-      { method: 'POST' }
+      `${API}/reset-password`,
+      {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ token: _resetToken, new_password: newPwd })
+      }
     );
 
     let data = {};
