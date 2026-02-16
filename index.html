@@ -2272,6 +2272,16 @@ renderNav();
 loadFeed();
 updateCatbarTop();
 checkResetToken();
+
+// Auto-open login modal if redirected from reset-password page
+if (new URLSearchParams(window.location.search).get('login') === '1') {
+  // Clean the URL param without reloading
+  const cleanUrl = window.location.pathname;
+  window.history.replaceState({}, '', cleanUrl);
+  // Show toast and open login modal after a short delay
+  showToast('Password reset successful! Please sign in. 🎉');
+  setTimeout(() => openModal('login'), 400);
+}
 </script>
 </body>
 </html>
