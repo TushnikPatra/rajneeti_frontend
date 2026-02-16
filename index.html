@@ -615,6 +615,141 @@ select option { background:var(--white); color:var(--text); }
   .modal-body { padding:20px; }
   .modal-footer { padding:0 20px 24px; }
 }
+
+/* ═══ RESET PASSWORD PAGE ═══ */
+.reset-page-wrap {
+  min-height: calc(100vh - 200px);
+  display: flex; align-items: center; justify-content: center;
+  padding: 60px 24px;
+  background: var(--bg);
+  position: relative;
+}
+.reset-page-wrap::before {
+  content: '';
+  position: absolute; inset: 0;
+  background:
+    linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px);
+  background-size: 48px 48px;
+  opacity: 0.3; pointer-events: none;
+}
+.reset-card {
+  width: 100%; max-width: 480px;
+  background: var(--bg2);
+  border: 1px solid var(--line2);
+  border-radius: 3px;
+  box-shadow: 0 8px 48px rgba(30,20,10,0.10);
+  overflow: hidden;
+  position: relative; z-index: 1;
+  animation: fadeUp .35s ease;
+}
+.reset-card-tricolor {
+  display: flex; height: 4px; width: 100%;
+}
+.reset-card-tricolor div { flex: 1; }
+.reset-card-header {
+  padding: 36px 36px 0;
+  text-align: center;
+}
+.reset-card-icon {
+  width: 64px; height: 64px; border-radius: 50%;
+  background: linear-gradient(135deg, rgba(255,107,0,0.12), rgba(255,107,0,0.04));
+  border: 1px solid rgba(255,107,0,0.2);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 28px;
+  margin: 0 auto 20px;
+}
+.reset-card-kicker {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 9px; letter-spacing: 3px; text-transform: uppercase;
+  color: var(--tc-saffron); margin-bottom: 10px;
+}
+.reset-card-title {
+  font-family: 'Libre Baskerville', serif;
+  font-size: 28px; font-weight: 700;
+  color: var(--text); line-height: 1.15; margin-bottom: 8px;
+}
+.reset-card-sub {
+  font-family: 'Crimson Pro', serif;
+  font-size: 16px; font-style: italic;
+  color: var(--text-dim); line-height: 1.6;
+}
+.reset-card-body { padding: 28px 36px; }
+.reset-card-footer { padding: 0 36px 32px; }
+
+/* Token invalid / expired state */
+.reset-invalid {
+  text-align: center; padding: 12px 0 4px;
+}
+.reset-invalid-icon { font-size: 48px; margin-bottom: 16px; }
+.reset-invalid-title {
+  font-family: 'Libre Baskerville', serif;
+  font-size: 22px; font-weight: 700; color: var(--red);
+  margin-bottom: 8px;
+}
+.reset-invalid-sub {
+  font-family: 'Crimson Pro', serif;
+  font-size: 16px; font-style: italic; color: var(--text-dim);
+  line-height: 1.65; margin-bottom: 24px;
+}
+
+/* Success state */
+.reset-success {
+  text-align: center; padding: 12px 0 4px;
+}
+.reset-success-icon { font-size: 48px; margin-bottom: 16px; }
+.reset-success-title {
+  font-family: 'Libre Baskerville', serif;
+  font-size: 22px; font-weight: 700; color: var(--teal);
+  margin-bottom: 8px;
+}
+.reset-success-sub {
+  font-family: 'Crimson Pro', serif;
+  font-size: 16px; font-style: italic; color: var(--text-dim);
+  line-height: 1.65; margin-bottom: 24px;
+}
+
+/* Password strength bar */
+.pwd-strength { margin-top: 8px; }
+.pwd-strength-bar {
+  height: 3px; background: var(--line2); border-radius: 2px;
+  overflow: hidden; margin-bottom: 5px;
+}
+.pwd-strength-fill {
+  height: 100%; width: 0%; border-radius: 2px;
+  transition: width .3s ease, background .3s ease;
+}
+.pwd-strength-label {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 9px; letter-spacing: 1.5px; text-transform: uppercase;
+  color: var(--text-dim);
+}
+
+.reset-err {
+  background: rgba(176,48,32,0.07); color: var(--red);
+  border: 1px solid rgba(176,48,32,0.2);
+  border-left: 3px solid var(--red);
+  padding: 12px 16px; margin-bottom: 20px;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 10px; letter-spacing: 1px; text-transform: uppercase;
+  display: none; animation: fadeUp .3s ease;
+}
+
+.reset-input-wrap { position: relative; }
+.reset-eye {
+  position: absolute; right: 14px; top: 50%; transform: translateY(-50%);
+  background: none; border: none; cursor: pointer;
+  font-size: 16px; color: var(--text-dim);
+  transition: color .2s; padding: 2px;
+}
+.reset-eye:hover { color: var(--text-mid); }
+
+@media (max-width: 640px) {
+  .reset-page-wrap { padding: 40px 16px; align-items: flex-start; }
+  .reset-card-header { padding: 28px 24px 0; }
+  .reset-card-body { padding: 24px; }
+  .reset-card-footer { padding: 0 24px 28px; }
+}
 </style>
 </head>
 <body>
@@ -924,6 +1059,111 @@ select option { background:var(--white); color:var(--text); }
     <div class="about-quote">
       <div class="about-quote-text">"The most powerful weapon in the hands of the oppressor is the mind of the oppressed. And the most powerful weapon in the hands of a citizen is a pen."</div>
       <div class="about-quote-attr">— Adapted for democratic India</div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══════ RESET PASSWORD ═══════ -->
+<div id="v-reset" class="view">
+  <div class="reset-page-wrap">
+    <div class="reset-card" id="reset-card">
+
+      <!-- Tricolor strip -->
+      <div class="reset-card-tricolor">
+        <div style="background:var(--tc-saffron)"></div>
+        <div style="background:rgba(200,200,200,0.4)"></div>
+        <div style="background:var(--tc-green)"></div>
+      </div>
+
+      <!-- STATE: default form -->
+      <div id="rp-state-form">
+        <div class="reset-card-header">
+          <div class="reset-card-icon">🔐</div>
+          <div class="reset-card-kicker">Account Security</div>
+          <div class="reset-card-title">Set New Password</div>
+          <div class="reset-card-sub">Choose a strong password to secure your Raajneeti account.</div>
+        </div>
+        <div class="reset-card-body">
+          <div class="reset-err" id="rp-error"></div>
+          <div class="fg" style="margin-bottom:20px;">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:7px;">
+              <label class="fl">New Password</label>
+            </div>
+            <div class="reset-input-wrap">
+              <input type="password" id="rp-new" placeholder="Min. 6 characters"
+                autocomplete="new-password" oninput="checkPwdStrength(this.value)">
+              <button type="button" class="reset-eye" onclick="togglePwd('rp-new',this)" tabindex="-1">👁</button>
+            </div>
+            <div class="pwd-strength">
+              <div class="pwd-strength-bar"><div class="pwd-strength-fill" id="pwd-fill"></div></div>
+              <div class="pwd-strength-label" id="pwd-label">Enter password</div>
+            </div>
+          </div>
+          <div class="fg" style="margin-bottom:0;">
+            <label class="fl" style="margin-bottom:7px;display:block;">Confirm Password</label>
+            <div class="reset-input-wrap">
+              <input type="password" id="rp-confirm" placeholder="Re-enter password"
+                autocomplete="new-password">
+              <button type="button" class="reset-eye" onclick="togglePwd('rp-confirm',this)" tabindex="-1">👁</button>
+            </div>
+          </div>
+        </div>
+        <div class="reset-card-footer">
+          <button class="btn btn-pub" id="rp-submit-btn"
+            style="width:100%;margin-bottom:14px;" onclick="submitResetPage()">
+            Reset Password
+          </button>
+          <div style="text-align:center;">
+            <span style="font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:1px;text-transform:uppercase;color:var(--text-dim);">
+              Remember it? <a onclick="openModal('login')" style="color:var(--tc-saffron);cursor:pointer;font-weight:600;">Sign In</a>
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <!-- STATE: success -->
+      <div id="rp-state-success" style="display:none;">
+        <div class="reset-card-header">
+          <div class="reset-success-icon">✅</div>
+          <div class="reset-card-kicker">All Done</div>
+          <div class="reset-card-title">Password Reset!</div>
+          <div class="reset-card-sub">Your password has been updated. You can now sign in with your new password.</div>
+        </div>
+        <div class="reset-card-body">
+          <div style="background:rgba(4,106,56,0.07);border:1px solid rgba(4,106,56,0.2);border-left:3px solid var(--tc-green);padding:14px 16px;font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--teal);">
+            ✓ &nbsp; Password updated successfully
+          </div>
+        </div>
+        <div class="reset-card-footer">
+          <button class="btn btn-pub" style="width:100%;margin-bottom:14px;"
+            onclick="openModal('login');goHome()">
+            Sign In Now
+          </button>
+        </div>
+      </div>
+
+      <!-- STATE: invalid / expired token -->
+      <div id="rp-state-invalid" style="display:none;">
+        <div class="reset-card-header" style="padding-bottom:28px;">
+          <div class="reset-card-icon" style="background:rgba(176,48,32,0.08);border-color:rgba(176,48,32,0.2);">⏱️</div>
+          <div class="reset-card-kicker" style="color:var(--red);">Link Expired</div>
+          <div class="reset-card-title">Reset Link Invalid</div>
+          <div class="reset-card-sub">This password reset link has expired or already been used. Reset links are valid for 15 minutes only.</div>
+        </div>
+        <div class="reset-card-footer" style="padding-top:0;">
+          <button class="btn btn-pub" style="width:100%;margin-bottom:14px;"
+            onclick="openModal('forgot')">
+            Request New Link
+          </button>
+          <div style="text-align:center;">
+            <span style="font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:1px;text-transform:uppercase;color:var(--text-dim);">
+              <a onclick="openModal('login')" style="color:var(--tc-saffron);cursor:pointer;font-weight:600;">Back to Sign In</a>
+            </span>
+          </div>
+        </div>
+      </div>
+
     </div>
   </div>
 </div>
@@ -1271,9 +1511,11 @@ async function doResetPassword() {
   const token = new URLSearchParams(window.location.search).get('token');
   if (!token) { showAuthError('No reset token found in URL.'); return; }
 
-  // Backend: POST /reset-password?token=...&new_password=...
-  const res = await fetch(`${API}/reset-password?token=${encodeURIComponent(token)}&new_password=${encodeURIComponent(newPwd)}`, {
-    method: 'POST'
+  // Backend: POST /reset-password with JSON body (ResetPasswordRequest schema)
+  const res = await fetch(`${API}/reset-password`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ token: token, new_password: newPwd })
   });
   const data = await res.json();
 
@@ -1512,6 +1754,8 @@ function renderFeed() {
     const ex  = (p.body||'').slice(0,220).trim() + ((p.body||'').length > 220 ? '…' : '');
     const meta = `
       <div class="card-meta">
+        <span class="cm-author">${esc(p.author_username || 'Anonymous')}</span>
+        <span class="cm-dot">·</span>
         <span class="cm-lang">${esc((p.language||'EN').slice(0,2).toUpperCase())}</span>
         <span class="cm-dot">·</span>
         <span class="cm-state">${p.state ? '📍 '+esc(p.state) : ''}</span>
@@ -1558,8 +1802,8 @@ function readPost(id) {
   document.getElementById('r-cat-badge').className   = 'cbadge ' + cc;
   document.getElementById('r-state').textContent     = p.state ? '📍 ' + p.state : '';
   document.getElementById('r-title').textContent     = p.title;
-  document.getElementById('r-pip').textContent       = (p.language||'A').charAt(0).toUpperCase();
-  document.getElementById('r-name').textContent      = 'Author';
+  document.getElementById('r-pip').textContent       = (p.author_username || p.language || 'A').charAt(0).toUpperCase();
+  document.getElementById('r-name').textContent      = p.author_username || 'Anonymous';
   document.getElementById('r-date').textContent      = (p.state||'India') + ' · ' + rt(p.body) + ' min read';
   document.getElementById('r-lang').textContent      = (p.language||'English').split('—')[0].trim();
 
@@ -1868,8 +2112,157 @@ if (window.ResizeObserver) {
 // ══════════════════════════════════════════════
 function checkResetToken() {
   const token = new URLSearchParams(window.location.search).get('token');
-  if (token) { openModal('reset'); }
+  if (token) { showResetPage(token); }
 }
+
+// ══════════════════════════════════════════════
+// RESET PASSWORD PAGE
+// ══════════════════════════════════════════════
+let _resetToken = null;  // token extracted from URL
+
+function showResetPage(token) {
+  _resetToken = token || new URLSearchParams(window.location.search).get('token');
+  // Switch to the reset view
+  document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+  document.getElementById('v-reset').classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'instant' });
+  // Reset to default form state
+  setResetState('form');
+  // Clear any previous values
+  const np = document.getElementById('rp-new');
+  const cp = document.getElementById('rp-confirm');
+  if (np) np.value = '';
+  if (cp) cp.value = '';
+  resetPwdStrength();
+  document.getElementById('rp-error').style.display = 'none';
+  setTimeout(() => { const el = document.getElementById('rp-new'); if (el) el.focus(); }, 150);
+}
+
+function setResetState(state) {
+  // 'form' | 'success' | 'invalid'
+  ['rp-state-form', 'rp-state-success', 'rp-state-invalid'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.style.display = 'none';
+  });
+  const target = document.getElementById('rp-state-' + state);
+  if (target) target.style.display = 'block';
+}
+
+function showResetError(msg) {
+  const el = document.getElementById('rp-error');
+  if (!el) return;
+  el.textContent = msg;
+  el.style.display = 'block';
+}
+function hideResetError() {
+  const el = document.getElementById('rp-error');
+  if (el) el.style.display = 'none';
+}
+
+async function submitResetPage() {
+  hideResetError();
+  const newPwd  = (document.getElementById('rp-new') || {}).value || '';
+  const confirm = (document.getElementById('rp-confirm') || {}).value || '';
+
+  if (!newPwd)          { showResetError('Please enter a new password.'); return; }
+  if (newPwd.length < 6){ showResetError('Password must be at least 6 characters.'); return; }
+  if (newPwd !== confirm){ showResetError('Passwords do not match. Please re-enter.'); return; }
+  if (!_resetToken)     { showResetError('No reset token found. Please request a new reset link.'); return; }
+
+  const btn = document.getElementById('rp-submit-btn');
+  btn.disabled = true; btn.textContent = 'Resetting…';
+
+  try {
+    // POST /reset-password with JSON body (ResetPasswordRequest schema)
+    const res = await fetch(
+      `${API}/reset-password`,
+      {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ token: _resetToken, new_password: newPwd })
+      }
+    );
+
+    let data = {};
+    try { data = await res.json(); } catch(_) {}
+
+    if (!res.ok) {
+      if (res.status === 400) {
+        // Token expired or already used
+        setResetState('invalid');
+      } else {
+        showResetError(data.detail || 'Reset failed. Please try again.');
+      }
+      return;
+    }
+
+    // Success!
+    _resetToken = null;
+    setResetState('success');
+    // Clean token from URL without reloading
+    try {
+      const url = new URL(window.location.href);
+      url.searchParams.delete('token');
+      window.history.replaceState({}, '', url.toString());
+    } catch(_) {}
+
+  } catch (err) {
+    showResetError('Network error. Please check your connection and try again.');
+  } finally {
+    btn.disabled = false; btn.textContent = 'Reset Password';
+  }
+}
+
+// Password strength meter
+function checkPwdStrength(val) {
+  const fill  = document.getElementById('pwd-fill');
+  const label = document.getElementById('pwd-label');
+  if (!fill || !label) return;
+
+  if (!val) { resetPwdStrength(); return; }
+
+  let score = 0;
+  if (val.length >= 6)  score++;
+  if (val.length >= 10) score++;
+  if (/[A-Z]/.test(val)) score++;
+  if (/[0-9]/.test(val)) score++;
+  if (/[^A-Za-z0-9]/.test(val)) score++;
+
+  const levels = [
+    { pct: '20%', color: '#B03020', text: 'Very Weak' },
+    { pct: '40%', color: '#E05040', text: 'Weak' },
+    { pct: '60%', color: '#E8960C', text: 'Fair' },
+    { pct: '80%', color: '#4A9A4A', text: 'Strong' },
+    { pct: '100%', color: '#046A38', text: 'Very Strong' },
+  ];
+  const lvl = levels[Math.min(score, 4)];
+  fill.style.width = lvl.pct;
+  fill.style.background = lvl.color;
+  label.textContent = lvl.text;
+  label.style.color = lvl.color;
+}
+
+function resetPwdStrength() {
+  const fill  = document.getElementById('pwd-fill');
+  const label = document.getElementById('pwd-label');
+  if (fill)  { fill.style.width = '0%'; }
+  if (label) { label.textContent = 'Enter password'; label.style.color = 'var(--text-dim)'; }
+}
+
+// Toggle password visibility
+function togglePwd(inputId, btn) {
+  const inp = document.getElementById(inputId);
+  if (!inp) return;
+  if (inp.type === 'password') { inp.type = 'text'; btn.textContent = '🙈'; }
+  else                         { inp.type = 'password'; btn.textContent = '👁'; }
+}
+
+// Enter key on reset page fields
+document.addEventListener('keydown', e => {
+  if (e.key === 'Enter' && document.getElementById('v-reset').classList.contains('active')) {
+    submitResetPage();
+  }
+});
 
 // ══════════════════════════════════════════════
 // INIT
